@@ -34,7 +34,7 @@ tipologiaRepository.save(tipologiaForm);
     public String delete(@PathVariable("id") Integer id) {
 
         tipologiaRepository.deleteById(id);
-        // faccio la redirect alla index
+
         return "redirect:/tipologia";
     }
 }
