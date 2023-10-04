@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -25,7 +22,7 @@ model.addAttribute("tipologiaObj", new Tipologia());
 return "tipologia/page";
     }
 
-@PostMapping("/tipologia_save")
+@PostMapping("/tipologia-save")
 public String doCreate(@Valid @ModelAttribute("tipologiaObj") Tipologia tipologiaForm,
                        RedirectAttributes redirectAttributes) {
 
@@ -33,5 +30,11 @@ tipologiaRepository.save(tipologiaForm);
 
     return "redirect:/tipologia";
 }
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
 
+        tipologiaRepository.deleteById(id);
+        // faccio la redirect alla index
+        return "redirect:/tipologia";
+    }
 }
