@@ -1,6 +1,7 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 
+import com.projectwork.shopstrumentimusicali.shop.Utils;
 import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
 import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
 import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
@@ -43,8 +44,9 @@ public class StrumentoController {
         // prendo la lista delle tipolodie
         List<Tipologia> tipologieList=tipologiaRepository.findAll();
         // passo lo strumento vuoto e le tipologie al form
-        model.addAttribute("strumento", new Strumento());
         model.addAttribute("tipologie", tipologieList);
+        model.addAttribute("strumento", new Strumento());
+
         return "admin/strumenti/form"; // template
     }
     @PostMapping("/crea")
@@ -56,10 +58,13 @@ public class StrumentoController {
 
             return "admin/strumenti/form";
         }
+        // salvo lo slug nell formStrumento
+        formStrumento.setSlug(Utils.getSlug(formStrumento.getNome()));
         // salvo nel db
         strumentoRepository.save(formStrumento);
         return "redirect:/admin/strumenti";
     }
     // modifica strumento
     // elimina strumeno
+
 }

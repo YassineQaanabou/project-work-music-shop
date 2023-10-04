@@ -21,6 +21,9 @@ public class Strumento {
     @NotBlank
     @Size(max = 100)
     private String nome;
+
+    @Size(max = 100)
+    private String slug;
     @NotBlank
     @Size(max = 255)
     private String urlFoto;
@@ -88,5 +91,13 @@ public class Strumento {
 
     public void setPrezzo(BigDecimal prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 }
