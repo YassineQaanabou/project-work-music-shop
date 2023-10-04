@@ -2,7 +2,9 @@ package com.projectwork.shopstrumentimusicali.shop.controller;
 
 
 import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
+import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
 import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
+import com.projectwork.shopstrumentimusicali.shop.repository.TipologiaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import java.util.List;
 public class StrumentoController {
     @Autowired
     private StrumentoRepository strumentoRepository;
+    @Autowired
+    private TipologiaRepository tipologiaRepository;
     // mostra strumenti
     @GetMapping
     public String list(Model model){
@@ -36,8 +40,11 @@ public class StrumentoController {
     @GetMapping("/crea")
 
     public String create(Model model){
-        // passo lo strumento vuoto al postmapping
+        // prendo la lista delle tipolodie
+        List<Tipologia> tipologieList=tipologiaRepository.findAll();
+        // passo lo strumento vuoto e le tipologie al form
         model.addAttribute("strumento", new Strumento());
+        model.addAttribute("tipologie", tipologieList);
         return "admin/strumenti/form"; // template
     }
     @PostMapping("/crea")
