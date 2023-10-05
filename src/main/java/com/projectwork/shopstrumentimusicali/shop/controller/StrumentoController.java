@@ -71,6 +71,10 @@ public class StrumentoController {
         Optional<Strumento> result= strumentoRepository.findBySlug(slug);
         // controllo dell optional
         if (result.isPresent()){
+            // prendo la lista delle tipolodie
+            List<Tipologia> tipologieList=tipologiaRepository.findAll();
+            // passo lo strumento vuoto e le tipologie al form
+            model.addAttribute("tipologie", tipologieList);
             model.addAttribute("strumento",result.get());
             return "admin/strumenti/form"; // template
         }else{
@@ -93,7 +97,7 @@ public class StrumentoController {
         }
         // trovo la tipologia
         Strumento strumento= strumentoRepository.findBySlug(slug).get();
-        formStrumento.setTipologia(strumento.getTipologia());
+       // formStrumento.setTipologia(strumento.getTipologia());
 
         // salvo lo slug nell formStrumento
         formStrumento.setSlug(Utils.getSlug(formStrumento.getNome()));
