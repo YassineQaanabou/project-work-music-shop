@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="card shadow" style="width: 18rem" th:each="strumento : ${strumenti}">
+    <img th:src="${strumento.urlFoto}" class="card-img-top" alt="${strumento.Tipologia}">
+    <div class="card-body w-100 pt-0 px-0">
+        <h5 class="card-title bg-warning p-2 text-white" th:text="${strumento.Nome}"></h5>
+        <p class="card-text fw-bold" th:text="${strumento.Prezzo}+ '$'"></p>
+        <p class="card-text fw-bold" th:text="${strumento.descrizione}"></p>
+        <p class="card-text fw-bold" th:text="${strumento.tipologia}"></p>
+
+
+        <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}">dettagli</a>
+
+
+    </div>
+</div>
+
+</body>
+</html>
