@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,141 +8,122 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+    footer {
+        font-family: 'Arial', sans-serif; /* Sostituisci 'Arial' con il tipo di carattere desiderato */
+    }
+</style>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Offcanvas dark navbar</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasDarkNavbar"
-          aria-controls="offcanvasDarkNavbar"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end text-bg-dark"
-          tabindex="-1"
-          id="offcanvasDarkNavbar"
-          aria-labelledby="offcanvasDarkNavbarLabel"
-        >
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-              Dark offcanvas
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdownn
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex mt-3" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary mx-1">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/}">Catalogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/}"></a>
+          </li>
+
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
       </div>
-    </nav>
+    </div>
+  </nav>
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Chitarre</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Tastiere</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Batterie</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Violini</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Chitarre elettriche</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"></a>
+    </li>
+   </ul>
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <div class="card">
+          <div class="card shadow p-3 mb-5 bg-white rounded">
             <img
               src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg"
               class="card-img-top"
               alt="..."
             />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title text-center">Chitarre</h5>
               <p class="card-text">
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
         </div>
-        <div class="col-3">
-          <div class="card" style="width: 18rem">
-            <img
-              src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg"
-              class="card-img-top"
-              alt="..."
-              style=""
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
         </div>
-        <div class="col-3">
-          <div class="card" style="width: 18rem">
-            <img
-              src="https://m.media-amazon.com/images/I/71aadZCyTfL._AC_SL1500_.jpg"
-              class="card-img-top"
-              alt="..."
-              style=""
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
+  <div style="height: 1000px;">
 
+  </div>
+  <footer class="bg-dark text-white p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Seguici su Social Media</h4>
+          <ul class="list-unstyled">
+            <li class="d-inline-block align-middle me-3">
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-instagram"></i> Instagram
+              </a>
+            </li>
+            <li class="d-inline-block align-middle me-3">
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-facebook-f"></i> Facebook
+              </a>
+            </li>
+            <li class="d-inline-block align-middle">
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-twitter"></i> Twitter
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h4>Informazioni di Contatto</h4>
+          <ul class="list-unstyled">
+            <li>Indirizzo: Via Nome della Strada, Città, CAP</li>
+            <li>Email: info@example.com</li>
+            <li>Telefono: +1234567890</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
