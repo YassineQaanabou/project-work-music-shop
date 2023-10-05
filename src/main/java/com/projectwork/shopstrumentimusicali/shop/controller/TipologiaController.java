@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/tipologia")
+@RequestMapping("/tipologie")
 public class TipologiaController {
 
     @Autowired
   TipologiaRepository tipologiaRepository;
 @GetMapping
     public String tipologiaPage(Model model){
-model.addAttribute("listaTipologie", tipologiaRepository.findAll());
-model.addAttribute("tipologiaObj", new Tipologia());
-return "tipologia/page";
+        model.addAttribute("listaTipologie", tipologiaRepository.findAll());
+        model.addAttribute("tipologiaObj", new Tipologia());
+        return "tipologia/page";
     }
 
 @PostMapping("/tipologia-save")

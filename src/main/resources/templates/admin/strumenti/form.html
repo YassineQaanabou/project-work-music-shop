@@ -46,18 +46,7 @@
               </ul>
             </div>
           </div>
-          <!-- tipologia strumento -->
-          <div class="mb-3 col-5">
-            <label for="tipologia" class="form-label">Tipologia:</label>
-            <select name="tipologia" id="tipologia" class="form-select">
-              <option value="">Seleziona una tipologia</option>
-              <option
-                th:each="tipologia : ${tipologie}"
-                th:value="${tipologia.id}"
-                th:text="${tipologia.nome}"
-              ></option>
-            </select>
-          </div>
+
         
         <!-- url foto nome strumenti-->
         <div class="mb-3 col-12">
@@ -124,6 +113,16 @@
                       th:text="${err}"
               ></li>
             </ul>
+          </div>
+        </div>
+        <!-- tipologia -->
+
+        <div class="col-4">
+          <h4>Categories</h4>
+          <div class="form-check" th:each="tipo : ${tipologie}">
+            <input class="form-check-input" type="radio" th:value="${tipo.id}"
+                   th:id="|category_${tipo.id}|" th:field="*{tipologia}" />
+            <label class="form-check-label" th:for="|category_${tipo.id}|" th:text="${tipo.nome}"></label>
           </div>
         </div>
 
