@@ -12,4 +12,7 @@ public class IndexController {
     public  String homepage(){
         return "homepage";
     }
+    // {nome categoria}
+    // /{nc}/{nome strumento}
+    // /i-nostri-strumenti
 }
