@@ -25,6 +25,13 @@ public class IndexController {
     // homepage
     @GetMapping
     public String homepage(Model model) {
+        List<Tipologia> tipologie = tipologiaRepository.findAll();
+        model.addAttribute("tipologie", tipologie);
+        return "homepage";
+    }
+
+    @GetMapping("/catalogo")
+    public String catalogo(Model model) {
         List<Strumento> strumenti = strumentoRepository.findAll();
         model.addAttribute("strumenti", strumenti);
         return "homepage";
