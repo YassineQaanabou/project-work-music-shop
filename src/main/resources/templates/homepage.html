@@ -30,36 +30,23 @@
   </div>
 
 
-
-  
-   <!-- card -->
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <div class="card shadow p-3 mb-5 bg-white rounded">
-            <img
-              src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title text-center">Chitarre</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-        </div>
-            </div>
-          </div>
-        </div>
+<!-- card -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-11"  th:each="tipologia : ${tipologie}">
+      <div class="card" style="width: 18rem;">
+        <img src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${tipologia.nome}"></h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     </div>
-  <div style="height: 1000px;">
-
   </div>
+</div>
+ 
+
 
   <!-- footer -->
   <footer th:replace="fragments/footer :: footer"></footer>
