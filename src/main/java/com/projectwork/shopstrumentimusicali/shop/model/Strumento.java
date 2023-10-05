@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name="strumento")
 public class Strumento {
 
     @Id
