@@ -12,6 +12,8 @@
   />
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+
 <div class="container">
   <!-- titolo parametrico con operatore ternario che testa se l'id dello user è null oppure no -->
   <h1 th:text="${tipologia.id != null ? 'Modifica tipologia' : 'Crea  tipologia'}"></h1>

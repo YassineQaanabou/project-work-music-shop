@@ -12,7 +12,9 @@
     />
   </head>
   <body>
-    <div class="container">
+  <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+
+  <div class="container">
       <!-- titolo parametrico con operatore ternario che testa se l'id dello user è null oppure no -->
       <h1 th:text="${strumento.id != null ? 'Modifica strumento' : 'Crea  strumento'}"></h1>
 
