@@ -1,6 +1,7 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
+import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,18 +13,23 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private StrumentoRepository strumentoRepository;
     @Autowired
     private TipologiaController tipologiaController;
+
     @GetMapping
-    public String adminPage(){
+    public String adminPage(Model model) {
         return "admin/admin-page";
     }
+
     //  CRUD PER LE TIPOLOGIE DALL ADMIN
     // mostra le tipologie
     @GetMapping("/tipologie")
-    public String list(Model model){
-        List<Tipologia> tipologieList=tipologiaController.tipologiaRepository.findAll();
-        model.addAttribute("tipologie",tipologieList);
+    public String list(Model model) {
+        List<Tipologia> tipologieList = tipologiaController.tipologiaRepository.findAll();
+        model.addAttribute("tipologie", tipologieList);
         return "admin/tipologie/list";
     }
     // crea una tipologia

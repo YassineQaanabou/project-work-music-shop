@@ -16,6 +16,8 @@ public class Tipologia {
     @NotBlank
     @Size(max = 100)
     private String nome;
+    @Size(max = 100)
+    private String slug;
     @OneToMany(mappedBy = "tipologia")
     private List<Strumento> strumenti;
 
@@ -39,6 +41,10 @@ public class Tipologia {
         return strumenti;
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -49,5 +55,9 @@ public class Tipologia {
 
     public void setStrumenti(List<Strumento> strumenti) {
         this.strumenti = strumenti;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 }
