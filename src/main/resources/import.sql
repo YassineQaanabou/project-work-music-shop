@@ -1,7 +1,7 @@
-INSERT INTO tipologia (nome) VALUES('pianoforte');
-INSERT INTO tipologia (nome) VALUES('chitarra');
-INSERT INTO tipologia (nome) VALUES('sassofono');
-INSERT INTO tipologia (nome) VALUES('batteria');
+INSERT INTO tipologia (nome,slug) VALUES('pianoforte','pianoforte');
+INSERT INTO tipologia (nome,slug) VALUES('chitarra','chitarra');
+INSERT INTO tipologia (nome,slug) VALUES('sassofono','sassofono');
+INSERT INTO tipologia (nome,slug) VALUES('batteria','batteria');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Yamaha ARIUS YDP-145 Digital Piano', 'https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg', 'Pianoforte Digitale da Casa per Dilettanti, Design Classico ed Elegante, Suonabilità Autentica del Pianoforte Acustico, Bianco', 912.99, 'yamaha-arius-ydp-145-digital-piano');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Donner Professionale Pianoforte', 'https://m.media-amazon.com/images/I/61sp7SOrwAL._AC_SL1485_.jpg', 'Digitale 88 Tasti Pesati con Supporto per Pianoforte e Pedale, Full Weighted Piano Elettroniche Fullsize per Principianti, DEP-20S', 529.00, 'donner-professionale-pianoforte');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Medeli Grand 510 BK', 'https://m.media-amazon.com/images/I/51b7QNffLAL._AC_SL1200_.jpg', 'Pianoforte Digitale a Coda', 3049.00, 'medeli-grand-510-bk');
