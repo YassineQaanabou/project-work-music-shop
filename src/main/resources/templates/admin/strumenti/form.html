@@ -1,61 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div class="container">
-    <!-- titolo parametrico con operatore ternario che testa se l'id dello user è null oppure no -->
-    <!-- <h1 th:text="${user.id != null ? 'Edit User' : 'Create User'}"></h1> -->
-    
-    <!-- th:action="${user.id != null} ? @{/users/edit/{id}(id = ${user.id})} : @{/users/create}" -->
-    <!-- form mappato sull'oggetto strumento -->
-    <form
-            
-            th:action="@{/admin/strumenti/crea}"
-            id="strumento"
-            method="POST"
-            th:object="${strumento}"
-    >
-        <!-- nome strumenti-->
-        <div class="mb-3">
-            <label for="first-name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first-name" th:field="*{firstName}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"></li>
-                </ul>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- titolo parametrico con operatore ternario che testa se l'id dello user è null oppure no -->
+      <h1 th:text="${strumento.id != null ? 'Modifica strumento' : 'Crea  strumento'}"></h1>
+
+      <!-- th:action="@{/admin/strumenti/crea}" -->
+      <!-- form mappato sull'oggetto strumento -->
+      <div class="row">
+      <form
+              th:action="${strumento.id != null} ? @{/admin/strumenti/{slug}/edit(slug = ${strumento.slug})} : @{/admin/strumenti/crea}"
+
+        id="strumento"
+        method="POST"
+        th:object="${strumento}"
+      >
+
+          <!-- nome strumenti-->
+          <div class="mb-3 col-6">
+            <label for="nome-strumento" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nome-strumento"
+              th:field="*{nome}"
+              th:errorClass="is-invalid"
+            />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('nome')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
             </div>
+          </div>
+
+        
+        <!-- url foto nome strumenti-->
+        <div class="mb-3 col-12">
+          <label for="url-strumento" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="url-strumento"
+            th:field="*{urlFoto}"
+            th:errorClass="is-invalid"
+          />
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('urlFoto')}">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('urlFoto')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
         </div>
-        <!-- lastName -->
-        <div class="mb-3">
-            <label for="last-name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last-name" th:field="*{lastName}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"></li>
-                </ul>
-            </div>
+        <!-- descrizione strumenti-->
+        <div class="mb-3 col-12">
+          <label for="descrizione-strumento" class="form-label">Descrizione</label>
+          <textarea
+                  class="form-control"
+                  id="descrizione-strumento"
+                  name="descrizione"
+                  th:field="*{descrizione}"
+                  th:errorClass="is-invalid"
+                  rows="4"
+          cols="50"
+          >
+          </textarea>
+
+          <div
+            class="invalid-feedback"
+            th:if="${#fields.hasErrors('descrizione')}"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('descrizione')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
         </div>
-        <!-- registrationDate -->
-        <div class="mb-3">
-            <label for="registration-date" class="form-label">Registration Date</label>
-            <input type="date" class="form-control" id="registration-date" th:field="*{registrationDate}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('registrationDate')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('registrationDate')}" th:text="${err}"></li>
-                </ul>
-            </div>
+
+<!-- prezzo -->
+        <div class="mb-3 col-1">
+          <label for="prezzo-strumento" class="form-label">Prezzo</label>
+          <input
+                  type="number"
+                  class="form-control"
+                  id="prezzo-strumento"
+                  name="prezzo"
+                  th:field="*{prezzo}"
+                  th:errorClass="is-invalid"
+                  step="0.01"
+          />
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('prezzo')}">
+            <ul>
+              <li
+                      th:each="err : ${#fields.errors('prezzo')}"
+                      th:text="${err}"
+              ></li>
+            </ul>
+          </div>
         </div>
+        <!-- tipologia -->
+
+        <div class="col-4">
+          <h4>Categories</h4>
+          <div class="form-check" th:each="tipo : ${tipologie}">
+            <input class="form-check-input" type="radio" th:value="${tipo.id}"
+                   th:id="|category_${tipo.id}|" th:field="*{tipologia}" />
+            <label class="form-check-label" th:for="|category_${tipo.id}|" th:text="${tipo.nome}"></label>
+          </div>
+        </div>
+
         <div>
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a th:href="@{/users}" class="btn btn-primary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a th:href="@{/users}" class="btn btn-primary">Cancel</a>
         </div>
-    </form>
+      </form>
+    </div>
 </div>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
