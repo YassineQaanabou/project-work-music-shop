@@ -6,9 +6,10 @@
     <title>TipologiaForm</title>
 </head>
 <body>
+<div class="container">
 <form
         id="form-tipologia"
-        th:action="@{/tipologia/tipologia-save}"
+        th:action="@{/tipologie/form}"
         th:object="${tipologiaObj}"
         method="POST">
     <div class="mb-3">
@@ -24,5 +25,6 @@
 
     <button type="submit" class="btn btn-primary">Invia</button>
 </form>
+    </div>
 </body>
 </html>

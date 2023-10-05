@@ -22,19 +22,19 @@ public class TipologiaController {
         return "tipologia/page";
     }
 
-@PostMapping("/tipologia-save")
+@PostMapping("/form")
 public String doCreate(@Valid @ModelAttribute("tipologiaObj") Tipologia tipologiaForm,
                        RedirectAttributes redirectAttributes) {
 
 tipologiaRepository.save(tipologiaForm);
 
-    return "redirect:/tipologia";
+    return "redirect:/tipologie";
 }
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
 
         tipologiaRepository.deleteById(id);
 
-        return "redirect:/tipologia";
+        return "redirect:/tipologie";
     }
 }

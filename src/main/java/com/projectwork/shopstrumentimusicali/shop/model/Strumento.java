@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="strumento")
+
 public class Strumento {
 
     @Id
@@ -17,7 +17,7 @@ public class Strumento {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="tipologia_id", nullable=false)
+   /* @JoinColumn(name="tipologia_id", nullable=false)*/
     private Tipologia tipologia;
     @NotBlank
     @Size(max = 100)
