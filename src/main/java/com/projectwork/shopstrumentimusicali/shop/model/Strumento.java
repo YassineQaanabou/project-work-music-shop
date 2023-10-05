@@ -16,7 +16,7 @@ public class Strumento {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="tipologia_id", nullable=false)
+    @JoinColumn(name="tipologia_id")
     private Tipologia tipologia;
     @NotBlank
     @Size(max = 100)

@@ -124,5 +124,4 @@ public class StrumentoController {
         // fa una redirect alla lista di User
         return "redirect:/admin/strumenti";
     }
-
 }
