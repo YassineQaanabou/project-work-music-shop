@@ -15,7 +15,7 @@
         <p class="card-text fw-bold" th:text="${strumento.tipologia}"></p>
 
 
-        <a th:href="@{/tipologia/{tipologiaSlug}/strumento/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}">dettagli</a>
+        <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}">dettagli</a>
 
 
     </div>

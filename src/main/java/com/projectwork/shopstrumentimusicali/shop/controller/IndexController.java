@@ -30,7 +30,7 @@ public class IndexController {
         return "homepage";
     }
 
-    @GetMapping("tipologia/{slug}")
+    @GetMapping("/{slug}")
     public String strumenti(@PathVariable("slug") String slug, Model model) {
         Tipologia tipologia = tipologiaRepository.findBySlug(slug);
         List<Strumento> strumenti = strumentoRepository.findByTipologiaId(tipologia.getId());
@@ -39,7 +39,7 @@ public class IndexController {
 
     }
 
-    @GetMapping("tipologia/{tipologiaSlug}/strumento/{strumentoSlug}")
+    @GetMapping("/{tipologiaSlug}/{strumentoSlug}")
     public String detailStrumento(@PathVariable("tipologiaSlug") String tipologiaSlug, @PathVariable("strumentoSlug") String strumentoSlug, Model model) {
         Optional<Strumento> strumentoOptional = strumentoRepository.findBySlug(strumentoSlug);
         Strumento strumento = strumentoOptional.get();
