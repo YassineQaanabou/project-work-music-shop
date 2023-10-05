@@ -14,13 +14,13 @@
 <body>
 <div class="container">
   <!-- titolo parametrico con operatore ternario che testa se l'id dello user è null oppure no -->
-  <h1 th:text="${tipologia.id != null ? 'Modifica strumento' : 'Crea  tipologia'}"></h1>
+  <h1 th:text="${tipologia.id != null ? 'Modifica tipologia' : 'Crea  tipologia'}"></h1>
 
   <!-- th:action="@{/admin/strumenti/crea}" -->
   <!-- form mappato sull'oggetto strumento -->
   <div class="row">
     <form
-            th:action="${tipologia.id != null} ? @{/admin/strumenti/{slug}/edit(slug = ${strumento.slug})} : @{/admin/tipologie/crea}"
+            th:action="${tipologia.id != null} ? @{/admin/tipologie/{slug}/edit(slug = ${tipologia.slug})} : @{/admin/tipologie/crea}"
 
             id="tipologie-form"
             method="POST"
