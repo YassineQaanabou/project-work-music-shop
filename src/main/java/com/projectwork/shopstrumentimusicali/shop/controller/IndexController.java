@@ -52,7 +52,7 @@ public class IndexController {
         Optional<Strumento> strumentoOptional = strumentoRepository.findBySlug(strumentoSlug);
         Strumento strumento = strumentoOptional.get();
         model.addAttribute("strumento", strumento);
-        return "customer/strumenti/detail";
+        return "customer/strumenti/details";
 
     }
 }
