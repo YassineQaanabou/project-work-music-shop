@@ -1,28 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Badmin strumenti</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
-<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Badmin strumenti</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
 
-<h1>lista strumenti</h1>
-<a th:href="@{/admin/strumenti/crea}">crea uno strumento</a>
-<p th:each="strumento : ${strumenti}" ><span th:text="${strumento.nome}"></span> <a th:href="@{/admin/strumenti/{slug}/edit(slug=${strumento.slug})}">modifica</a> &nbsp; <<form
+    <a th:href="@{/admin/strumenti/crea}">crea uno strumento</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-3 mx-auto my-3"><a th:href="@{/admin/strumenti/crea}" class="btn btn-success">
+          crea uno strumento</a
+        ></div>
+        
+      </div>
+      <div class="row">
+        <div class="col-8 mx-auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Strumento</th>
+                <th scope="col">Quantità</th>
+                <th scope="col">Vendite</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="strumento : ${strumenti}">
+                <td th:text="${strumento.nome}"></td>
+                <td>0</td>
+                <td>0</td>
+                <td>
+                  <a
+                    class="btn btn-primary"
+                    th:href="@{/admin/strumenti/{slug}/edit(slug=${strumento.slug})}"
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                </td>
+                <td>
+                  <form
+                    th:action="@{/admin/strumenti/{slug}/delete(slug=${strumento.slug})}"
+                    method="POST"
+                  >
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-        th:action="@{/admin/strumenti/{slug}/delete(slug=${strumento.slug})}"
-        method="POST"
-
->
-  <button type="submit" class="btn btn-primary">
-    <i class="fa-solid fa-trash-can"></i>
-  </button>
-</form></p>
-<!-- footer -->
-<footer th:replace="fragments/footer :: footer"></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
+    <!-- footer -->
+    <footer th:replace="fragments/footer :: footer"></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
