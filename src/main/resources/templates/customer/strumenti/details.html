@@ -19,6 +19,29 @@
         </div>
         <div class="col-lg-6">
           <p th:text="${strumento.descrizione}"></p>
+
+          <form method="POST"
+                th:action="@{/{slugTipo}/{slugStrumento}(slugTipo=${tipologia.slug},slugStrumento=${strumento.slug})}"
+                th:object="${acquisto}">
+            <div class="mb-3">
+              <label for="quantita" class="form-label">Quantità:</label>
+              <input type="number" class="form-control" id="quantita" name="quantita" th:field="*{quantità}" >
+              <div class="invalid-feedback" th:if="${#fields.hasErrors('quantità')}">
+                <ul>
+                  <li
+                          th:each="err : ${#fields.errors('quantità')}"
+                          th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Acquista</button>
+          </form>
+
         </div>
       </div>
     </div>
