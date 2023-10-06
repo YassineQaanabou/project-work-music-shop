@@ -9,14 +9,24 @@
 <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
 <div class="container">
     <div class="row">
-        <div class="col-lg-6" th:each="strumento : ${strumenti}">
-            <img th:src="${strumento.urlFoto}" alt="Immagine dello strumento" />
+        <div class="col-lg-6">
+            <img th:src="${strumento.urlFoto}" class="w-100 mx-auto p-5" alt="${strumento.Tipologia}" />
         </div>
-        <div class="col-lg-6" th:each="strumento : ${strumenti}">
-            <p th:text="${strumento.descrizione}"></p>
+        <div class="col-lg-6">
+            <div class="py-5">
+            <p class="text-lg-center" th:text="${strumento.descrizione}"></p>
+            </div>
         </div>
     </div>
+
+
+
+
+
+
 </div>
-<footer th:replace="fragments/footer :: footer"></footer>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 </html>
