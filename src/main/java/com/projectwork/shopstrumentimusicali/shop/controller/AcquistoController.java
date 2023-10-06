@@ -1,10 +1,10 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -16,12 +16,17 @@ public class AcquistoController {
         //passo un acquisto vuoto
         return null;
     }
-    @GetMapping("/{slugTipo}/{slugStrum}/acquista")
+    @PostMapping("/{slugTipo}/{slugStrum}/acquista")
 
     public String doCreate(Model model,
                            @PathVariable("slugTipo") String slugTipo,
-                           @PathVariable("slugStrum") String slugStrum){
-        //passo un acquisto vuoto
+                           @PathVariable("slugStrum") String slugStrum,
+                           BindingResult bindingResult,
+                           @Valid @ModelAttribute("acquisto") Acquisto acquistoForm
+    ){
+        //prendo utente e lo setto nell' acquisto
+        // prendo lo strumento e lo setto nell' acquisto
+
         return null;
     }
 
