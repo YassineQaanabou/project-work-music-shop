@@ -16,7 +16,7 @@ public class Strumento {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="tipologia_id")
+    @JoinColumn(name = "tipologia_id")
     private Tipologia tipologia;
     @NotBlank
     @Size(max = 100)
@@ -34,9 +34,10 @@ public class Strumento {
     @Min(0)
     private BigDecimal prezzo;
 
-    public Strumento(Tipologia tipologia, String nome, String urlFoto, String descrizione, BigDecimal prezzo) {
+    public Strumento(Tipologia tipologia, String nome, String slug, String urlFoto, String descrizione, BigDecimal prezzo) {
         this.tipologia = tipologia;
         this.nome = nome;
+        this.slug = slug;
         this.urlFoto = urlFoto;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
