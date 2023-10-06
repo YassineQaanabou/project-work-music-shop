@@ -5,7 +5,7 @@ INSERT INTO tipologia (nome,slug,url_foto) VALUES('batterie','batterie','https:/
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Yamaha ARIUS YDP-145 Digital Piano', 'https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg', 'Pianoforte Digitale da Casa per Dilettanti, Design Classico ed Elegante, Suonabilità Autentica del Pianoforte Acustico, Bianco', 912.99, 'yamaha-arius-ydp-145-digital-piano');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Donner Professionale Pianoforte', 'https://m.media-amazon.com/images/I/61sp7SOrwAL._AC_SL1485_.jpg', 'Digitale 88 Tasti Pesati con Supporto per Pianoforte e Pedale, Full Weighted Piano Elettroniche Fullsize per Principianti, DEP-20S', 529.00, 'donner-professionale-pianoforte');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Medeli Grand 510 BK', 'https://m.media-amazon.com/images/I/51b7QNffLAL._AC_SL1200_.jpg', 'Pianoforte Digitale a Coda', 3049.00, 'medeli-grand-510-bk');
-INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (2, 'Yamaha C40BLII Chitarra Classica', 'https://m.media-amazon.com/images/I/51fvymlbKnS._AC_SL1500_.jpg', 'Chitarra 4/4 Classica in Legno (65 cm, scala da 25 9/16”) - 6 Corde in Nylon, Nero', 160.90, 'yamaha-c40blii-chitarra-classica');
+INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (2, 'Yamaha C40BLII Chitarra Classica', 'https://m.media-amazon.com/images/I/413+FNbhyOL._AC_UL480_FMwebp_QL65_.jpg', 'Chitarra 4/4 Classica in Legno (65 cm, scala da 25 9/16”) - 6 Corde in Nylon, Nero', 160.90, 'yamaha-c40blii-chitarra-classica');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (2, 'Gibson Hummingbird Studio RW Natural', 'https://m.media-amazon.com/images/I/71aadZCyTfL._AC_SL1500_.jpg', 'Chitarra acustica', 3451.53, 'gibson-hummingbird-studio-rw-natural');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (2, 'Cordoba 55 FCE Negra Ziricote', 'https://m.media-amazon.com/images/I/61Ii0s697SL._AC_SL1500_.jpg', 'Chitarra classica', 1689.99, 'cordoba-55-fce-negra-ziricote');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (3, 'Btuty Sassofono', 'https://m.media-amazon.com/images/I/61zRYliCb2L._AC_SL1500_.jpg', 'Sassofono contralto in ottone lucido inciso Eb E-Flat Natural White Shell Button Strumento a fiato con custodia Guanti muto Panno di pulizia Spazzola per cintura', 280.99, 'btuty-sassofono');
@@ -16,9 +16,12 @@ INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) 
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (4, 'Batteria Acustica', 'https://m.media-amazon.com/images/I/618j+k5Zz8S._AC_SL1200_.jpg', 'Completa BDK-1 Rosso', 413.27, 'batteria-acustica');
 
 
+INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Rossi','Mariorossi7@gmail.com','password',true);
+INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Bianchi','Mariobianchi7@gmail.com',null,false);
 
 
 
+INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano','20833','Via 7','03243343',1)
 
 
 
