@@ -1,7 +1,11 @@
 package com.projectwork.shopstrumentimusicali.shop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
 
 @Entity
 public class Acquisto {
@@ -12,19 +16,20 @@ public class Acquisto {
     @ManyToOne
     @JoinColumn(name = "strumento_id", nullable = false)
     private Strumento strumento;
-    @ManyToOne
-    @JoinColumn(name = "utente_id", nullable = false)
-    private Utente utente;
-    @NotBlank
+
+   @NotNull
+    @Min(1)
     private int quantità;
 
-    public Acquisto(Strumento strumento, Utente utente, int quantità) {
-        this.strumento = strumento;
-        this.utente = utente;
-        this.quantità = quantità;
+    private LocalDate dataAcquisto;
+    // getter e setter
+
+    public LocalDate getDataAcquisto() {
+        return dataAcquisto;
     }
 
-    public Acquisto() {
+    public void setDataAcquisto(LocalDate dataAcquisto) {
+        this.dataAcquisto = dataAcquisto;
     }
 
     public Integer getId() {
@@ -35,9 +40,6 @@ public class Acquisto {
         return strumento;
     }
 
-    public Utente getUtente() {
-        return utente;
-    }
 
     public int getQuantità() {
         return quantità;
@@ -51,9 +53,7 @@ public class Acquisto {
         this.strumento = strumento;
     }
 
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
+
 
     public void setQuantità(int quantità) {
         this.quantità = quantità;
