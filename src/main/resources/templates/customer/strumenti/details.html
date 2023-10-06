@@ -19,28 +19,30 @@
         </div>
         <div class="col-lg-6">
           <p th:text="${strumento.descrizione}"></p>
+          <div class="col-2">
+            <form method="POST"
+                  th:action="@{/{slugTipo}/{slugStrumento}(slugTipo=${tipologia.slug},slugStrumento=${strumento.slug})}"
+                  th:object="${acquisto}">
+              <div class="mb-3">
+                <label for="quantita" class="form-label">Quantità:</label>
+                <input type="number" class="form-control" id="quantita" name="quantita" th:field="*{quantità}" th:errorClass="is-invalid" >
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('quantità')}">
+                  <ul>
+                    <li
+                            th:each="err : ${#fields.errors('quantità')}"
+                            th:text="${err}"
+                    ></li>
+                  </ul>
+                </div>
 
-          <form method="POST"
-                th:action="@{/{slugTipo}/{slugStrumento}(slugTipo=${tipologia.slug},slugStrumento=${strumento.slug})}"
-                th:object="${acquisto}">
-            <div class="mb-3">
-              <label for="quantita" class="form-label">Quantità:</label>
-              <input type="number" class="form-control" id="quantita" name="quantita" th:field="*{quantità}" >
-              <div class="invalid-feedback" th:if="${#fields.hasErrors('quantità')}">
-                <ul>
-                  <li
-                          th:each="err : ${#fields.errors('quantità')}"
-                          th:text="${err}"
-                  ></li>
-                </ul>
               </div>
 
-            </div>
 
 
+              <button type="submit" class="btn btn-primary">Acquista</button>
+            </form>
+          </div>
 
-            <button type="submit" class="btn btn-primary">Acquista</button>
-          </form>
 
         </div>
       </div>

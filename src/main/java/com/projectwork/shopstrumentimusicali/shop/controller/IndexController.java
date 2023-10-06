@@ -68,6 +68,8 @@ public class IndexController {
 
     public String doBuy(@Valid @ModelAttribute("acquisto") Acquisto formAcquisto, BindingResult bindingResult, @PathVariable("tipologiaSlug") String tipologiaSlug, @PathVariable("strumentoSlug") String strumentoSlug, Model model){
         if(bindingResult.hasErrors()){
+            model.addAttribute("tipologia",tipologiaRepository.findBySlug(tipologiaSlug).get());
+            model.addAttribute("strumento",strumentoRepository.findBySlug(strumentoSlug).get());
             return "customer/strumenti/details";
         }
         // aggiungo lo strumento
