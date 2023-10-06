@@ -11,12 +11,12 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6" th:each="strumento : ${strumenti}">
+        <div class="col-12 col-md-6 col-lg-4" th:each="strumento : ${strumenti}">
             <div class="card shadow mb-4">
-                <img th:src="${strumento.urlFoto}" class="card-img-top" alt="${strumento.tipologia}">
+                <img th:src="${strumento.urlFoto}" class="card-img-top" alt="${strumento.Tipologia}">
                 <div class="card-body">
-                    <h5 class="card-title bg-warning p-2 text-white" th:text="${strumento.nome}"></h5>
-                    <p class="card-text fw-bold" th:text="${strumento.prezzo}+ '$'"></p>
+                    <h5 class="card-title bg-warning p-2 text-white" th:text="${strumento.Nome}"></h5>
+                    <p class="card-text fw-bold" th:text="${strumento.Prezzo}+ '$'"></p>
                     <p class="card-text fw-bold" th:text="${strumento.descrizione}"></p>
                     <p class="card-text fw-bold" th:text="${strumento.tipologia}"></p>
                     <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}">dettagli</a>
