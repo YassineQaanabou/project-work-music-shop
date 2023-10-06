@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 public class Utente {
     @Id
@@ -20,7 +22,8 @@ public class Utente {
     @Size(max = 100)
     @Column(unique = true)
     private String email;
-
+    @OneToMany(mappedBy = "utente")
+    private List<Acquisto> acquisti;
     private String password;
     private boolean registrato;
     // costruttori
