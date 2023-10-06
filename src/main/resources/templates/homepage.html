@@ -1,73 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Bootstrap demo</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"/>
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
-    footer {
-        font-family: 'Arial', sans-serif; /* Sostituisci 'Arial' con il tipo di carattere desiderato */
-    }
-</style>
-  </head>
-  <body>
-
-  <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
-
-
-  <div class="container w-75">
-    <div class="row d-flex justify-content-center ">
-      <div class="col" th:each="tipologia : ${tipologie}" th:text="${tipologia.nome}">
-  
-      </div>
-    </div>
-  </div>
+    footer {font-family: 'Arial', sans-serif; /* Sostituisci 'Arial' con il tipo di carattere desiderato */ }
 
 
 
-  
-   <!-- card -->
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <div class="card shadow p-3 mb-5 bg-white rounded">
-            <img
-              src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title text-center">Chitarre</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
+
+
+    </style>
+</head>
+<body>
+
+<nav th:replace="fragments/navbar :: navbar(area='')"></nav>
+
+
+<!-- card -->
+<div class="container">
+    <div class="row">
+        <div class="col-3" th:each="tipologia : ${tipologie}">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <img th:src="${tipologia.urlFoto}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title" th:text="${tipologia.nome}"></h5>
+                    <a th:href="@{/{tipologiaSlug}(tipologiaSlug=${tipologia.slug})}"
+                       class="btn stretched-link"><i class="fa-solid fa-angle-right" style="color: #ffffff;"></i></a>
+                </div>
             </div>
-          </div>
         </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
     </div>
-  <div style="height: 1000px;">
+</div>
 
-  </div>
+<!-- footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
 
-  <!-- footer -->
-  <footer th:replace="fragments/footer :: footer"></footer>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+></script>
+</body>
 </html>
