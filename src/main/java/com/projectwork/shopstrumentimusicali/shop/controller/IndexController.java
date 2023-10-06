@@ -34,7 +34,7 @@ public class IndexController {
     public String catalogo(Model model) {
         List<Strumento> strumenti = strumentoRepository.findAll();
         model.addAttribute("strumenti", strumenti);
-        return "homepage";
+        return "customer/strumenti/list";
     }
 
     @GetMapping("/{tipologiaSlug}")
