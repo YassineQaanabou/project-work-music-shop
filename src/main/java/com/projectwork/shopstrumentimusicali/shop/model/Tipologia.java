@@ -22,9 +22,14 @@ public class Tipologia {
     @OneToMany(mappedBy = "tipologia")
     private List<Strumento> strumenti;
 
-    public Tipologia(String nome, List<Strumento> strumenti) {
+    @NotBlank
+    private String urlFoto;
+
+    public Tipologia(String nome, String slug, List<Strumento> strumenti, String urlFoto) {
         this.nome = nome;
+        this.slug = slug;
         this.strumenti = strumenti;
+        this.urlFoto = urlFoto;
     }
 
     public Tipologia() {
@@ -40,6 +45,10 @@ public class Tipologia {
 
     public List<Strumento> getStrumenti() {
         return strumenti;
+    }
+
+    public String getUrlFoto() {
+        return urlFoto;
     }
 
     public void setId(Integer id) {
@@ -60,5 +69,9 @@ public class Tipologia {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public void setUrlFoto(String fotoUrl) {
+        this.urlFoto = urlFoto;
     }
 }
