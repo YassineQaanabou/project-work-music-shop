@@ -9,7 +9,7 @@
 <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
 <div class="container">
     <div class="row">
-        <div class="col-lg-6" th:each="strumento : ${strumenti}">
+        <div class="col-lg-6" >
             <img th:src="${strumento.urlFoto}" alt="Immagine dello strumento" />
         </div>
         <div class="col-lg-6" th:each="strumento : ${strumenti}">
