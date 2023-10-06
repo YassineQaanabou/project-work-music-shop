@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Strumento {
@@ -33,6 +34,8 @@ public class Strumento {
     @NotNull
     @Min(0)
     private BigDecimal prezzo;
+    @OneToMany(mappedBy = "strumento")
+    private List<Acquisto> acquisti;
 
     public Strumento(Tipologia tipologia, String nome, String slug, String urlFoto, String descrizione, BigDecimal prezzo) {
         this.tipologia = tipologia;
