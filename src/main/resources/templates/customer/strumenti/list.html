@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar(area='')"></nav>
 
 <div class="card shadow" style="width: 18rem" th:each="strumento : ${strumenti}">
     <img th:src="${strumento.urlFoto}" class="card-img-top" alt="${strumento.Tipologia}">
