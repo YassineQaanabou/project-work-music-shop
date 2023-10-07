@@ -19,7 +19,7 @@ public class Acquisto {
 
    @NotNull
     @Min(1)
-    private int quantità;
+    private int quantity;
 
     private LocalDate dataAcquisto;
     // getter e setter
@@ -41,9 +41,7 @@ public class Acquisto {
     }
 
 
-    public int getQuantità() {
-        return quantità;
-    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -54,8 +52,11 @@ public class Acquisto {
     }
 
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public void setQuantità(int quantità) {
-        this.quantità = quantità;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

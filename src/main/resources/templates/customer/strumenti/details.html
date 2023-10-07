@@ -25,11 +25,12 @@
                   th:object="${acquisto}">
               <div class="mb-3">
                 <label for="quantita" class="form-label">Quantità:</label>
-                <input type="number" class="form-control" id="quantita" name="quantita" th:field="*{quantità}" th:errorClass="is-invalid" >
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('quantità')}">
+                <input type="number" class="form-control" id="quantita" name="quantita" th:field="*{quantity}" th:errorClass="is-invalid" >
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}">
+                  // ${acquisto.utente.email}
                   <ul>
                     <li
-                            th:each="err : ${#fields.errors('quantità')}"
+                            th:each="err : ${#fields.errors('quantity')}"
                             th:text="${err}"
                     ></li>
                   </ul>

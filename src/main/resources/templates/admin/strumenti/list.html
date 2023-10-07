@@ -36,7 +36,6 @@
               <tr>
                 <th scope="col">Strumento</th>
                 <th scope="col">Quantità</th>
-                <th scope="col">Vendite</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -44,8 +43,7 @@
             <tbody>
               <tr th:each="strumento : ${strumenti}">
                 <td th:text="${strumento.nome}"></td>
-                <td>0</td>
-                <td>0</td>
+                <td th:text="${strumento.magazzino.quantity}"></td>
                 <td>
                   <a
                     class="btn btn-primary"
