@@ -42,8 +42,13 @@
             </thead>
             <tbody>
               <tr th:each="strumento : ${strumenti}">
-                <td th:text="${strumento.nome}"></td>
-                <td th:text="${strumento.magazzino.quantity}"></td>
+                <td >
+                  <span th:if="${strumento.magazzino.quantity lt 0}" class="fs-4 mx-1"><i class="fa-sharp fa-solid fa-circle-exclamation text-danger"></i></span>
+                  <span th:text="${strumento.nome}"></span>
+                </td>
+                <td >
+                  <span th:text="${strumento.magazzino.quantity}"></span>
+                </td>
                 <td>
                   <a
                     class="btn btn-primary"
