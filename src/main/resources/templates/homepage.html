@@ -158,8 +158,8 @@
   <!-- fine carosello -->
 
 
-
-
+<!-- strumenti mese top seller -->
+<p th:each="strumento : ${strumentiPiuVendutiMese}" th:text="${strumento.nome}"></p>
   <!-- footer -->
   <footer th:replace="fragments/footer :: footer"></footer>
 
