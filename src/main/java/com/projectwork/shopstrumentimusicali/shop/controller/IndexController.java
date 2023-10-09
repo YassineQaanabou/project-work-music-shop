@@ -103,9 +103,7 @@ public class IndexController {
 
         List<Strumento> strumentiTrovati = strumentoRepository.findByCustomSearchQuery(searchString);
 
-
         model.addAttribute("strumenti", strumentiTrovati);
-
 
         return "customer/strumenti/list";
     }
