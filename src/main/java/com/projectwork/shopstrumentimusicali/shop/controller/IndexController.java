@@ -97,5 +97,15 @@ public class IndexController {
         return "redirect:/";
 
     }
+@GetMapping("/cerca")
+    public String cercaStrumento(@RequestParam("q") String searchString, Model model) {
+        List<Strumento> listaStrumentiFiltrata = strumentoRepository.findByNomeContainingIgnoreCase(searchString);
+        model.addAttribute("strumento", listaStrumentiFiltrata);
+    List<Tipologia> tipologie = tipologiaRepository.findAll();
+    model.addAttribute("tipologie", tipologie);
 
+    return "strumenti/list"; // Resta sulla homepage
 }
+
+    }
+
