@@ -41,7 +41,9 @@ public class Strumento {
     private List<Acquisto> acquisti;
 
     @OneToMany(mappedBy = "strumento")
-    private List<Assortimento> assortimenti;
+    @JsonIgnore
+
+    private List<Assortimento> assortimenti=new ArrayList<>();
 
     @OneToOne(mappedBy = "strumento")
     @JsonIgnore

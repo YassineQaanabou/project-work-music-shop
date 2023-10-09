@@ -1,5 +1,6 @@
 package com.projectwork.shopstrumentimusicali.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ public class Acquisto {
 
     @ManyToOne
     @JoinColumn(name = "strumento_id", nullable = false)
+    @JsonIgnore
     private Strumento strumento;
 
    @NotNull
