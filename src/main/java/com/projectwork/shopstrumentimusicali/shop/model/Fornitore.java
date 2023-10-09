@@ -25,6 +25,13 @@ public class Fornitore {
         return nome;
     }
 
+    public List<FornitoreStrumento> getFornitoreStrumento() {
+        return fornitoreStrumento;
+    }
+
+    public List<Assortimento> getAssortimenti() {
+        return assortimenti;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -34,4 +41,11 @@ public class Fornitore {
         this.nome = nome;
     }
 
+    public void setFornitoreStrumento(List<FornitoreStrumento> fornitoreStrumento) {
+        this.fornitoreStrumento = fornitoreStrumento;
+    }
+
+    public void setAssortimenti(List<Assortimento> assortimenti) {
+        this.assortimenti = assortimenti;
+    }
 }

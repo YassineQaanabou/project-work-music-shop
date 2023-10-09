@@ -18,14 +18,12 @@
 
     <!--  fornitore-->
 
-        <div class="form-group">
-            <label for="fornitore">fornitore:</label>
-            <select class="form-select" aria-label="Default select example" id="fornitore" th:field="${fornitore}">
-                <option selected>Open this select menu</option>
-                <option th:each="fornitore : ${fornitori}" th:value="${fornitore.id}"
-                        th:text="${fornitore.nome}"></option>
-            </select>
-        </div>
+    <div class="form-group">
+        <label for="fornitore">category:</label>
+        <select class="form-control" id="fornitore" th:field="*{fornitore.id}">
+            <option th:each="fornitore : ${fornitori}" th:value="${fornitore.id}"
+                    th:text="${fornitore.nome}"></option>
+        </select>
     </div>
 
     <!-- quantità-->

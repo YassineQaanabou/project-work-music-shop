@@ -41,7 +41,6 @@ public class Strumento {
     private List<Assortimento> assortimenti;
 
     @OneToOne(mappedBy = "strumento")
-
     private Magazzino magazzino;
 
     @OneToMany(mappedBy = "strumento")
