@@ -100,13 +100,20 @@ public class IndexController {
     }
 
     @GetMapping("/cerca")
-    public String cercaStrumento(@RequestParam("q") String searchString, Model model) {
+    public String cercaStrumento(
+            @RequestParam( value = "q", required = false ) String searchString,
+            @RequestParam(value = "prezzoMin", required = false) Double prezzoMin,
+            @RequestParam(value = "prezzoMax", required = false) Double prezzoMax,
+            Model model
+    ) {
 
-        List<Strumento> strumentiTrovati = strumentoRepository.findByCustomSearchQuery(searchString);
+        List<Strumento> strumentiTrovati = strumentoRepository.findByCustomSearchQuery(searchString, prezzoMin, prezzoMax);
+
 
         model.addAttribute("strumenti", strumentiTrovati);
 
         return "customer/strumenti/list";
     }
+
 
 }
