@@ -61,15 +61,7 @@
 </div>
 
 
-<div class="container py-2" th:if="${strumenti != null and not #lists.isEmpty(strumenti)}">
-  <h2 class="text-center">Risultati della ricerca</h2>
-  <div class="row g-3 flex-nowrap" style="overflow-x: auto">
-    <div class="col-12 col-md-4" th:each="strumento : ${strumenti}">
-      <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-        <img class="card-img-top" th:src="${strumento.urlFoto}" alt="info" />
-        <div class="card-body">
-          <h5 class="card-title text-center" th:text="${strumento.nome}"></h5>
-        </div>
+
       </div>
     </div>
   </div>
