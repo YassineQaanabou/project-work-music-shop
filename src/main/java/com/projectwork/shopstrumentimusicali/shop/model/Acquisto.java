@@ -16,7 +16,6 @@ public class Acquisto {
 
     @ManyToOne
     @JoinColumn(name = "strumento_id", nullable = false)
-    @JsonIgnore
     private Strumento strumento;
 
    @NotNull

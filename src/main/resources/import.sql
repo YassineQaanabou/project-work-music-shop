@@ -19,10 +19,10 @@ INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) 
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Rossi','Mariorossi7@gmail.com','password',true);
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Bianchi','Mariobianchi7@gmail.com',null,false);
 
-INSERT INTO magazzino(quantity,strumento_id) VALUES (1,1);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (1,2);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (10,3);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (-2,4);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,1);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,2);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,3);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,4);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,5);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,6);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,7);
@@ -37,7 +37,16 @@ INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano'
 
 
 
-
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",3,2);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",1,7);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",2,4);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-01",5,1);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-02",1,2);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-12-03",1,12);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-05",4,8);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",2,11);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-17-07",1,3);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",2,5);
 
 
 
