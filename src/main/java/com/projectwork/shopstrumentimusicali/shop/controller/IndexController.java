@@ -101,7 +101,7 @@ public class IndexController {
     @GetMapping("/cerca")
     public String cercaStrumento(@RequestParam("q") String searchString, Model model) {
 
-        List<Strumento> strumentiTrovati = strumentoRepository.findByNomeContainingIgnoreCase(searchString);
+        List<Strumento> strumentiTrovati = strumentoRepository.findByCustomSearchQuery(searchString);
 
 
         model.addAttribute("strumenti", strumentiTrovati);

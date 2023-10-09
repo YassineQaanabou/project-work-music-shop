@@ -17,5 +17,6 @@ public interface StrumentoRepository extends JpaRepository<Strumento,Integer>  {
     @Query("SELECT s, SUM(a.quantity) AS totalQuantity FROM Strumento s LEFT JOIN Acquisto a ON s.id = a.strumento.id AND a.dataAcquisto >= :lastMonth GROUP BY s ORDER BY totalQuantity DESC")
     //@Query("SELECT a.strumento FROM Acquisto a WHERE a.dataAcquisto >= :lastMonth GROUP BY a.strumento ORDER BY SUM(a.quantity) DESC")
     List<Strumento> findTopSellingInLastMonth(@Param("lastMonth") LocalDate lastMonth);
-    List<Strumento> findByNomeContainingIgnoreCase(String search);
+    @Query("SELECT s FROM Strumento s WHERE LOWER(s.nome) LIKE %:searchString%")
+    List<Strumento> findByCustomSearchQuery(String searchString);
 }
