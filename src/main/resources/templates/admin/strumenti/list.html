@@ -17,6 +17,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <style>
+
+
+    </style>
   </head>
   <body>
     <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
@@ -36,16 +40,19 @@
               <tr>
                 <th scope="col">Strumento</th>
                 <th scope="col">Quantità</th>
-                <th scope="col">Vendite</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="strumento : ${strumenti}">
-                <td th:text="${strumento.nome}"></td>
-                <td>0</td>
-                <td>0</td>
+              <tr th:each="strumento : ${strumenti}" th:class="${strumento.magazzino.quantity lt 0} ? 'table-danger' : ''">
+                <td >
+                  <span th:if="${strumento.magazzino.quantity lt 0}" class="fs-4 mx-1"><i class="fa-sharp fa-solid fa-circle-exclamation text-danger"></i></span>
+                  <span th:text="${strumento.nome}"></span>
+                </td>
+                <td >
+                  <span th:text="${strumento.magazzino.quantity}"></span>
+                </td>
                 <td>
                   <a
                     class="btn btn-primary"
@@ -63,6 +70,14 @@
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </form>
+                </td>
+                <td>
+                  <a
+                          class="btn btn-primary"
+                          th:href="@{/admin/{slugTipo}/{slugNome}/assortimento(slugNome=${strumento.slug},slugTipo=${strumento.tipologia.slug})}"
+                  >
+                    <i class="fa-solid fa-truck-fast"></i>
+                  </a>
                 </td>
               </tr>
             </tbody>

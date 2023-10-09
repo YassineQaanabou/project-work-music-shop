@@ -1,9 +1,11 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 import com.projectwork.shopstrumentimusicali.shop.model.Acquisto;
+import com.projectwork.shopstrumentimusicali.shop.model.Magazzino;
 import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
 import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
 import com.projectwork.shopstrumentimusicali.shop.repository.AcquistoRepository;
+import com.projectwork.shopstrumentimusicali.shop.repository.MagazzinoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.TipologiaRepository;
 import jakarta.validation.Valid;
@@ -27,10 +29,18 @@ public class IndexController {
     @Autowired
     private TipologiaRepository tipologiaRepository;
 
+    @Autowired
+    private MagazzinoRepository magazzinoRepository;
+
     // homepage
     @GetMapping
     public String homepage(Model model) {
+        List<Strumento> strumentiPiuVendutiMese= strumentoRepository.findTopSellingInLastMonth(LocalDate.now().minusMonths(1));
+
+        model.addAttribute("strumentiPiuVendutiMese",strumentiPiuVendutiMese);
+
         List<Tipologia> tipologie = tipologiaRepository.findAll();
+
         model.addAttribute("tipologie", tipologie);
         return "homepage";
     }
@@ -78,6 +88,12 @@ public class IndexController {
         formAcquisto.setDataAcquisto(LocalDate.now());
         // salvo nel db
         acquistoRepository.save(formAcquisto);
+        // modifico la quantita disponibile magazzione
+        Strumento strumentoResult=strumentoRepository.findBySlug(strumentoSlug).get();
+        Magazzino magazzino=magazzinoRepository.findByStrumento(strumentoResult).get();
+        magazzino.setQuantity(magazzino.getQuantity()-formAcquisto.getQuantity());
+        magazzino.setId(magazzino.getId());
+        magazzinoRepository.save(magazzino);
         return "redirect:/";
 
     }

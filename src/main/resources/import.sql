@@ -2,6 +2,7 @@ INSERT INTO tipologia (nome,slug,url_foto) VALUES('pianoforti','pianoforti','htt
 INSERT INTO tipologia (nome,slug,url_foto) VALUES('chitarre','chitarre','https://shop.scavino.it/files/scavino2_Files/Foto/398639_3.PNG');
 INSERT INTO tipologia (nome,slug,url_foto) VALUES('sassofoni','sassofoni','https://m.media-amazon.com/images/I/71S4Ef7BQpL.jpg');
 INSERT INTO tipologia (nome,slug,url_foto) VALUES('batterie','batterie','https://www.tuttomusicasrl.it/wp-content/uploads/2022/05/BATTERIA-ACUSTICA-SOUNDSATION-JDK100-BL-JUNIOR-PER-BAMBINI-2.png');
+
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Yamaha ARIUS YDP-145 Digital Piano', 'https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg', 'Pianoforte Digitale da Casa per Dilettanti, Design Classico ed Elegante, Suonabilità Autentica del Pianoforte Acustico, Bianco', 912.99, 'yamaha-arius-ydp-145-digital-piano');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Donner Professionale Pianoforte', 'https://m.media-amazon.com/images/I/61sp7SOrwAL._AC_SL1485_.jpg', 'Digitale 88 Tasti Pesati con Supporto per Pianoforte e Pedale, Full Weighted Piano Elettroniche Fullsize per Principianti, DEP-20S', 529.00, 'donner-professionale-pianoforte');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Medeli Grand 510 BK', 'https://m.media-amazon.com/images/I/51b7QNffLAL._AC_SL1200_.jpg', 'Pianoforte Digitale a Coda', 3049.00, 'medeli-grand-510-bk');
@@ -15,10 +16,21 @@ INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) 
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (4, 'XDrum Semi 20', 'https://m.media-amazon.com/images/I/71x5CIMK0XL._AC_SL1500_.jpg', 'Studio Batteria Midnight Black (nera)', 369.00, 'xdrum-semi-20');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (4, 'Batteria Acustica', 'https://m.media-amazon.com/images/I/618j+k5Zz8S._AC_SL1200_.jpg', 'Completa BDK-1 Rosso', 413.27, 'batteria-acustica');
 
-
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Rossi','Mariorossi7@gmail.com','password',true);
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Bianchi','Mariobianchi7@gmail.com',null,false);
 
+INSERT INTO magazzino(quantity,strumento_id) VALUES (1,1);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,2);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,3);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,4);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,5);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,6);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,7);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,8);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,9);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,10);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,11);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,12);
 
 
 INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano','20833','Via 7','03243343',1)

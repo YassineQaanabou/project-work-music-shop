@@ -25,7 +25,7 @@ public class AcquistoController {
         model.addAttribute("tipologia",tipologiaRepository.findBySlug(slugTipo).get());
          //passo un acquisto vuoto
         Acquisto acquisto = new Acquisto();
-        acquisto.setQuantità(1);
+        acquisto.setQuantity(1);
         model.addAttribute("acquisto",acquisto);
         return "customer/acquisti/form";
     }

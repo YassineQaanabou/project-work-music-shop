@@ -2,8 +2,10 @@ package com.projectwork.shopstrumentimusicali.shop.controller;
 
 
 import com.projectwork.shopstrumentimusicali.shop.Utils;
+import com.projectwork.shopstrumentimusicali.shop.model.Magazzino;
 import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
 import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
+import com.projectwork.shopstrumentimusicali.shop.repository.MagazzinoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.TipologiaRepository;
 import jakarta.validation.Valid;
@@ -26,6 +28,8 @@ public class StrumentoController {
     private StrumentoRepository strumentoRepository;
     @Autowired
     private TipologiaRepository tipologiaRepository;
+    @Autowired
+    private MagazzinoRepository magazzinoRepository;
     // mostra strumenti
     @GetMapping
     public String list(Model model){
@@ -58,10 +62,16 @@ public class StrumentoController {
 
             return "admin/strumenti/form";
         }
+
         // salvo lo slug nell formStrumento
         formStrumento.setSlug(Utils.getSlug(formStrumento.getNome()));
         // salvo nel db
         strumentoRepository.save(formStrumento);
+        // creo il magazziono vuoto
+        Magazzino magazzino = new Magazzino();
+        magazzino.setQuantity(0);
+        magazzino.setStrumento(formStrumento);
+        magazzinoRepository.save(magazzino);
         return "redirect:/admin/strumenti";
     }
     // modifica strumento
