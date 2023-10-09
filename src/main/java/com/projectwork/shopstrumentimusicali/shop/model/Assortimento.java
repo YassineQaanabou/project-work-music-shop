@@ -13,7 +13,6 @@ public class Assortimento {
 
     private Integer id;
 
-    private String nomeFornitore;
     @NotNull
     private int quantity;
     private BigDecimal totale;
@@ -22,6 +21,11 @@ public class Assortimento {
     @ManyToOne
     @JoinColumn(name = "strumento_id", nullable = false)
     private Strumento strumento;
+
+    @ManyToOne
+    @JoinColumn(name = "fornitore_id", nullable = false)
+    private Fornitore fornitore;
+
 
     // getter e setter
 
@@ -43,13 +47,6 @@ public class Assortimento {
         this.id = id;
     }
 
-    public String getNomeFornitore() {
-        return nomeFornitore;
-    }
-
-    public void setNomeFornitore(String nomeFornitore) {
-        this.nomeFornitore = nomeFornitore;
-    }
 
     public BigDecimal getTotale() {
         return totale;
@@ -73,5 +70,13 @@ public class Assortimento {
 
     public void setStrumento(Strumento strumento) {
         this.strumento = strumento;
+    }
+
+    public Fornitore getFornitore() {
+        return fornitore;
+    }
+
+    public void setFornitore(Fornitore fornitore) {
+        this.fornitore = fornitore;
     }
 }

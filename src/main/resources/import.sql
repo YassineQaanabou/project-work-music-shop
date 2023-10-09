@@ -35,6 +35,20 @@ INSERT INTO magazzino(quantity,strumento_id) VALUES (0,12);
 
 INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano','20833','Via 7','03243343',1)
 
+INSERT INTO fornitore(nome) VALUES ('amazon');
+INSERT INTO fornitore(nome) VALUES ('internet');
+INSERT INTO fornitore(nome) VALUES ('strada');
+
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 1, 500.99);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 2, 1000.99);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 3, 400.99);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 1, 550.99);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 2, 600.99);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 3, 400.99);
+
+
+
+
 
 
 
