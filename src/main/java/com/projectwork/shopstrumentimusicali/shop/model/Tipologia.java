@@ -1,9 +1,11 @@
 package com.projectwork.shopstrumentimusicali.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +22,8 @@ public class Tipologia {
     @Size(max = 100)
     private String slug;
     @OneToMany(mappedBy = "tipologia")
-    private List<Strumento> strumenti;
+    @JsonIgnore
+    private List<Strumento> strumenti =new ArrayList<>();
 
     @NotBlank
     private String urlFoto;

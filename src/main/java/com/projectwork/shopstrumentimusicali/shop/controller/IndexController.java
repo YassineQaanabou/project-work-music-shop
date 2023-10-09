@@ -43,6 +43,7 @@ public class IndexController {
 
         model.addAttribute("tipologie", tipologie);
         return "homepage";
+
     }
 
     @GetMapping("/catalogo")

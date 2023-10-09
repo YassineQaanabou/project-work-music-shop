@@ -17,21 +17,20 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <style>
-
-
-    </style>
+    <style></style>
   </head>
   <body>
     <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+    <canvas id="strumentiChart" width="400" height="100"></canvas>
 
     <a th:href="@{/admin/strumenti/crea}">crea uno strumento</a>
     <div class="container">
       <div class="row">
-        <div class="col-3 mx-auto my-3"><a th:href="@{/admin/strumenti/crea}" class="btn btn-success">
-          crea uno strumento</a
-        ></div>
-        
+        <div class="col-3 mx-auto my-3">
+          <a th:href="@{/admin/strumenti/crea}" class="btn btn-success">
+            crea uno strumento</a
+          >
+        </div>
       </div>
       <div class="row">
         <div class="col-8 mx-auto">
@@ -45,12 +44,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="strumento : ${strumenti}" th:class="${strumento.magazzino.quantity lt 0} ? 'table-danger' : ''">
-                <td >
-                  <span th:if="${strumento.magazzino.quantity lt 0}" class="fs-4 mx-1"><i class="fa-sharp fa-solid fa-circle-exclamation text-danger"></i></span>
+              <tr
+                th:each="strumento : ${strumenti}"
+                th:class="${strumento.magazzino.quantity lt 0} ? 'table-danger' : ''"
+              >
+                <td>
+                  <span
+                    th:if="${strumento.magazzino.quantity lt 0}"
+                    class="fs-4 mx-1"
+                    ><i
+                      class="fa-sharp fa-solid fa-circle-exclamation text-danger"
+                    ></i
+                  ></span>
                   <span th:text="${strumento.nome}"></span>
                 </td>
-                <td >
+                <td>
                   <span th:text="${strumento.magazzino.quantity}"></span>
                 </td>
                 <td>
@@ -73,8 +81,8 @@
                 </td>
                 <td>
                   <a
-                          class="btn btn-primary"
-                          th:href="@{/admin/{slugTipo}/{slugNome}/assortimento(slugNome=${strumento.slug},slugTipo=${strumento.tipologia.slug})}"
+                    class="btn btn-primary"
+                    th:href="@{/admin/{slugTipo}/{slugNome}/assortimento(slugNome=${strumento.slug},slugTipo=${strumento.tipologia.slug})}"
                   >
                     <i class="fa-solid fa-truck-fast"></i>
                   </a>
@@ -88,6 +96,76 @@
 
     <!-- footer -->
     <footer th:replace="fragments/footer :: footer"></footer>
+
+    <!-- script grafico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      // Ottieni il riferimento all'elemento canvas
+      var ctx = document.getElementById("strumentiChart").getContext("2d");
+
+      // Funzione per recuperare i dati dal controller REST
+      function fetchDatiDaController() {
+        fetch("/admin/api/magazzino") // Assicurati che l'URL sia corretto
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // Estrai il nome dello strumento e la quantità dal magazzino
+            var strumenti = data;
+            var nomiStrumenti = strumenti.map(function (strumento) {
+              return strumento.strumento.nome;
+            });
+
+            var quantitaMagazzino = strumenti.map(function (strumento) {
+              return strumento.quantity;
+            });
+
+            // Crea il grafico a barre orizzontale
+            var chart = new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: nomiStrumenti,
+                datasets: [
+                  {
+                    label: "Quantità nel Magazzino",
+                    data: quantitaMagazzino,
+                    backgroundColor: quantitaMagazzino.map(function (val) {
+                      return val < 0
+                        ? "rgba(255, 0, 0, 0.2)"
+                        : "rgba(75, 192, 192, 0.2)";
+                    }),
+                    borderColor: quantitaMagazzino.map(function (val) {
+                      return val < 0
+                        ? "rgba(255, 0, 0, 1)"
+                        : "rgba(75, 192, 192, 1)";
+                    }),
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                    stepSize: 5,
+                  },
+                  y: {
+                    beginAtZero: false, // Permette valori negativi sull'asse Y
+                  },
+                },
+              },
+            });
+          })
+          .catch(function (error) {
+            console.error("Errore nella richiesta dei dati:", error);
+          });
+      }
+
+      // Chiama la funzione per recuperare i dati e creare il grafico
+      fetchDatiDaController();
+    </script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

@@ -20,9 +20,9 @@ INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Ross
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Bianchi','Mariobianchi7@gmail.com',null,false);
 
 INSERT INTO magazzino(quantity,strumento_id) VALUES (1,1);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (0,2);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (0,3);
-INSERT INTO magazzino(quantity,strumento_id) VALUES (0,4);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (1,2);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (10,3);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (-2,4);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,5);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,6);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,7);
