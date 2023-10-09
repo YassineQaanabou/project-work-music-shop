@@ -16,13 +16,16 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-6" th:each="strumento : ${strumenti}">
-          <div class="card shadow mb-4">
+        <div class="col-lg-3 col-md-3 col-6" th:each="strumento : ${strumenti}">
+          <div class="card mb-4 d-flex flex-column">
+          <div class="bg-img align-self-center d-flex justify-content-center" style="height: 200px; width: 200px">
             <img
               th:src="${strumento.urlFoto}"
-              class="card-img-top"
               alt="${strumento.tipologia}"
-            />
+              class="d-flex justify-content-center"
+              style="max-height: 100%; position: relative"
+              />
+          </div>
             <div class="card-body">
               <h5
                 class="card-title bg-warning p-2 text-white"
