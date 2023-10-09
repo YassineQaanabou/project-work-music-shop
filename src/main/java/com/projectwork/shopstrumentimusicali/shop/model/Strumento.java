@@ -44,7 +44,7 @@ public class Strumento {
     private List<Assortimento> assortimenti;
 
     @OneToOne(mappedBy = "strumento")
-
+    @JsonIgnore
     private Magazzino magazzino;
 
 
