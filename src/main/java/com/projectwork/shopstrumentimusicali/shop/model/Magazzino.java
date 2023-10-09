@@ -1,5 +1,7 @@
 package com.projectwork.shopstrumentimusicali.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,6 +16,7 @@ public class Magazzino {
    private int quantity;
 
     @OneToOne
+
     private  Strumento strumento;
     // getter e setter
 

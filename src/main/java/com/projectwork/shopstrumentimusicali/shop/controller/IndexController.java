@@ -36,6 +36,7 @@ public class IndexController {
     @GetMapping
     public String homepage(Model model) {
         List<Strumento> strumentiPiuVendutiMese= strumentoRepository.findTopSellingInLastMonth(LocalDate.now().minusMonths(1));
+
         model.addAttribute("strumentiPiuVendutiMese",strumentiPiuVendutiMese);
 
         List<Tipologia> tipologie = tipologiaRepository.findAll();

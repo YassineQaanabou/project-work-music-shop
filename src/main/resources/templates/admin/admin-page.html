@@ -69,24 +69,17 @@
 
 <body>
 <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
-
-  <div style="mw-100 height:1000px">
-      <div class="d-flex justify-content-center">
-        <div class="mb-3 justify-content-around">
-          <button type="button" class="btn btn-outline-primary btn-square btn-block">
-            <a href="/admin/strumenti/crea">Add item</a>
-          </button>
-          <button type="button" class="btn btn-outline-primary btn-square btn-block">
-          <a href="/admin/strumenti">List items</a>
-            </button>
-        </div>
-      </div>
-
-    <div class="d-flex justify-content-center">
-      <p>ASD</p>
-
+<div class="container my-2">
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <a th:href="@{/admin/strumenti/crea}" class="btn  btn-outline-primary mx-1">Add Item</a>
+    <a th:href="@{/admin/strumenti}" class="btn  btn-outline-primary mx-1"> Item List</a>
+    <a th:href="@{/admin/assortimenti}" class="btn  btn-outline-primary mx-1">Assortimenti</a>
+    <a th:href="@{/admin/acquisti}" class="btn  btn-outline-primary mx-1">Vendite</a>
     </div>
-  </div>
+  </div>  
+</div>
+
   <main>
     <!--
     <div class="container d-flex justify-content-around">
