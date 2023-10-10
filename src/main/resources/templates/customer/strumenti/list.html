@@ -17,7 +17,22 @@
   <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo minimo" name="prezzoMin">
   <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo massimo" name="prezzoMax">
   <button class="btn btn-outline-success my-2 my-sm-0 bg-primary mx-2" type="submit">Cerca</button>
+
 </form>
+<form method="GET" action="/cerca-per-tipologia">
+  <!-- Aggiungi un select per le tipologie -->
+  <label for="tipologiaSlug">Tipologia:</label>
+  <select name="tipologiaSlug" id="tipologiaSlug">
+    <option value="">Tutte le tipologie</option>
+    <option th:each="tipologia : ${tipologie}"
+            th:value="${tipologia.slug}"
+            th:text="${tipologia.nome}"></option>
+  </select>
+
+  <button type="submit">Cerca</button>
+</form>
+
+
 
 <div class="container">
   <div class="row">

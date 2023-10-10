@@ -101,7 +101,7 @@ public class IndexController {
 
     @GetMapping("/cerca")
     public String cercaStrumento(
-            @RequestParam( value = "q", required = false ) String searchString,
+            @RequestParam(value = "q", required = false) String searchString,
             @RequestParam(value = "prezzoMin", required = false) Double prezzoMin,
             @RequestParam(value = "prezzoMax", required = false) Double prezzoMax,
             Model model
@@ -114,6 +114,17 @@ public class IndexController {
 
         return "customer/strumenti/list";
     }
+    @GetMapping("/cerca-per-tipologia")
+    public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
+        List<Tipologia> listaTipologie = tipologiaRepository.findAll();
+        model.addAttribute("tipologie", listaTipologie);
+        List<Strumento> strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
+
+        model.addAttribute("strumenti", strumentiPerTipologia);
+        return "customer/strumenti/list";
+    }
+
+
 
 
 }

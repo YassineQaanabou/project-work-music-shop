@@ -21,5 +21,7 @@ public interface StrumentoRepository extends JpaRepository<Strumento,Integer>  {
     List<Strumento> findByCustomSearchQuery(String searchString, Double prezzoMin, Double prezzoMax);
     @Query("SELECT s FROM Strumento s WHERE LOWER(s.nome) LIKE %:searchString%")
     List<Strumento> findByCustomSearchQueryName(String searchString);
-
+    @Query("SELECT s FROM Strumento s WHERE s.tipologia.slug = :tipologiaSlug")
+    List<Strumento> findByTipologiaSlug(@Param("tipologiaSlug") String tipologiaSlug);
 }
+

@@ -156,4 +156,6 @@ public class AdminController {
 
         return "admin/strumenti/list";
     }
+
+
 }
