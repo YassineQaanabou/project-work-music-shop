@@ -112,19 +112,24 @@ public class IndexController {
 
         model.addAttribute("strumenti", strumentiTrovati);
 
-        return "admin/strumenti/list";
+        return "customer/strumenti/list";
     }
     @GetMapping("/cerca-per-tipologia")
-    public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
+    public String cercaPerTipologia(@RequestParam(value = "tipologiaSlug", required = false) String tipologiaSlug, Model model) {
         List<Tipologia> listaTipologie = tipologiaRepository.findAll();
         model.addAttribute("tipologie", listaTipologie);
-        List<Strumento> strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
+
+        List<Strumento> strumentiPerTipologia;
+
+        if (tipologiaSlug != null && !tipologiaSlug.isBlank()) {
+            strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
+        } else {
+            strumentiPerTipologia = strumentoRepository.findAll(); // Carica tutti gli strumenti
+        }
 
         model.addAttribute("strumenti", strumentiPerTipologia);
-        return "admin/strumenti/list";
+        return "customer/strumenti/list";
     }
-
-
 
 
 }

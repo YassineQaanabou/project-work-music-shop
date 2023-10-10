@@ -20,7 +20,6 @@
 
 </form>
 <form method="GET" action="/cerca-per-tipologia">
-
   <label for="tipologiaSlug">Tipologia:</label>
   <select name="tipologiaSlug" id="tipologiaSlug">
     <option value="">Tutte le tipologie</option>
@@ -28,8 +27,8 @@
             th:value="${tipologia.slug}"
             th:text="${tipologia.nome}"></option>
   </select>
-
   <button type="submit">Cerca</button>
+
 </form>
 
 
