@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface MagazzinoRepository extends JpaRepository<Magazzino,Integer> {
     Optional<Magazzino> findByStrumento(Strumento strumento);
-    List<Magazzino> findByQuantity(int quantity);
+   List<Magazzino> findByQuantity(int quantity);
 }

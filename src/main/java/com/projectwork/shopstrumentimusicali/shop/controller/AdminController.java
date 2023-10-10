@@ -148,11 +148,12 @@ public class AdminController {
         for (Magazzino magazzino : quantitaMagazzini) {
             Optional<Strumento> strumentoOptional = Optional.ofNullable(magazzino.getStrumento());
             if (strumentoOptional.isPresent()) {
-                strumentiPerQuantita.add(magazzino.getStrumento());
+                strumentiPerQuantita.add(strumentoOptional.get());
             }
         }
 
         model.addAttribute("strumenti", strumentiPerQuantita);
+
         return "admin/strumenti/list";
     }
 }
