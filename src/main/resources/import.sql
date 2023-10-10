@@ -45,7 +45,7 @@ INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-02",1
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-12-03",1,12);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-05",4,8);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",2,11);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-17-07",1,3);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",1,3);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",2,5);
 
 

@@ -1,160 +1,193 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <style>
+      .card {
+        width: 200px;
+        height: 200px;
+      }
+      .big-text {
+        font-size: 4em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <body class="bg-secondary-subtle">
+    <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
 
-
-
-</head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
-<body class="bg-secondary-subtle">
-<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
-
-<div class="container my-2">
-<div class="row">
-  <div class="col d-flex justify-content-center">
-    <a th:href="@{/admin/strumenti/crea}" class="btn  btn-outline-primary mx-1">Add Item</a>
-    <a th:href="@{/admin/strumenti}" class="btn  btn-outline-primary mx-1"> Item List</a>
-    <a th:href="@{/admin/assortimenti}" class="btn  btn-outline-primary mx-1">Assortimenti</a>
-    <a th:href="@{/admin/acquisti}" class="btn  btn-outline-primary mx-1">Vendite</a>
-    </div>
-  </div>  
-</div>
-
-<!--  -->
-<div class="container">
-
-    <div class="row d-flex justify-content-around">
-      <div class="col-3  mb-3 mb-sm-0">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          </div>
+    <div class="container my-2">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <a
+            th:href="@{/admin/strumenti/crea}"
+            class="btn btn-outline-primary mx-1"
+            >Add Item</a
+          >
+          <a th:href="@{/admin/strumenti}" class="btn btn-outline-primary mx-1">
+            Item List</a
+          >
+          <a
+            th:href="@{/admin/assortimenti}"
+            class="btn btn-outline-primary mx-1"
+            >Assortimenti</a
+          >
+          <a th:href="@{/admin/acquisti}" class="btn btn-outline-primary mx-1"
+            >Vendite</a
+          >
         </div>
       </div>
-      <div class="col-3">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+
+    <!--  -->
+    <div class="container">
+      <div class="row d-flex justify-content-around">
+        <div class="col-3 d-flex flex-column justify-content-center">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fs-6 text-secondary">Profitto</h5>
+              <p class="card-text fs-2 fw-bold text-dark" th:text="${profitto}">
+
+              </p>
+            </div>
           </div>
         </div>
+        <div class="col-3 d-flex flex-column justify-content-center">
+          <div class="card  bg-light-subtle">
+            <div class="card-body">
+              <h6 class="card-title fs-6 text-secondary">Vendite Totali</h6>
+              <p class="card-text big-text text-dark" th:text="${venditeTotali}"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 p-2">
+          <canvas id="pieChart" width="10" height="10" class="w-100"></canvas>
+        </div>
       </div>
-      <div class="col-4 p-1">
-        <canvas id="pieChart" width="200" height="200"></canvas>
 
+      <!-- row sales vendite nel tempo -->
+      <div class="row">
+        <div class="col-6 mx-auto p-5">
+          <canvas id="barChart" width="200" height="100"></canvas>
+        </div>
       </div>
     </div>
 
-    <!-- row sales vendite nel tempo -->
-    <div class="row">
-      <div class="col-6 py-5">
-        <canvas id="lineChart" width="400" height="250"></canvas>
-      </div>
-  </div>
-</div>
+    <script src="chart/chart.js"></script>
 
-<script src="chart/chart.js"></script>
-
-<!-- script pie chart -->
-<script>
-  // Codice JavaScript per recuperare i dati dalla tua API REST
-  fetch('/admin/api/acquisti')
-      .then(response => response.json())
-      .then(data => {
+    <!-- script pie chart -->
+    <script>
+      // Codice JavaScript per recuperare i dati dalla tua API REST
+      fetch("/admin/api/acquisti")
+        .then((response) => response.json())
+        .then((data) => {
           // Estrai le etichette e i dati dai risultati
-          const labels = data.map(item => item[0]); // Nome del prodotto
-          const dataValues = data.map(item => item[1]); // Vendite totali
+          const labels = data.map((item) => item[0]); // Nome del prodotto
+          const dataValues = data.map((item) => item[1]); // Vendite totali
 
           // Crea il grafico a torta con Chart.js
-          var ctx = document.getElementById('pieChart').getContext('2d');
+          var ctx = document.getElementById("pieChart").getContext("2d");
           var pieChart = new Chart(ctx, {
-              type: 'pie',
-              data: {
-                  labels: labels,
-                  datasets: [{
-                      data: dataValues,
-                      backgroundColor: [
-                      'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)'
-                          // Altri colori...
-                      ],
-                      borderWidth: 1,
-                  }]
-              }
-          });
-      })
-      .catch(error => console.error(error));
-</script>
-<!-- script vendite time series -->
-
-
-<script>
-        // Dummy data for multiple datasets
-        const labels = ['January', 'February', 'March', 'April', 'May'];
-        const datasetAData = [10, 15, 12, 17, 14]; // Replace with your data for Dataset A
-        const datasetBData = [5, 8, 6, 9, 7];     // Replace with your data for Dataset B
-
-        // Create a line chart
-        var ctx = document.getElementById('lineChart').getContext('2d');
-        var lineChart = new Chart(ctx, {
-            type: 'line',
+            type: "pie",
             data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Dataset A',
-                        data: datasetAData,
-                        borderColor: 'rgba(255, 99, 132, 1)', // Red color
-                        fill: false
-                    },
-                    {
-                        label: 'Dataset B',
-                        data: datasetBData,
-                        borderColor: 'rgba(54, 162, 235, 1)', // Blue color
-                        fill: false
-                    }
-                    // You can add more datasets here if needed
-                ]
+              labels: labels,
+              datasets: [
+                {
+                  data: dataValues,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.5)",
+                    "rgba(255, 206, 86, 0.5)",
+                    "rgba(75, 192, 192, 0.5)",
+                    "rgba(153, 102, 255, 0.5)",
+                    // Altri colori...
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+          });
+        })
+        .catch((error) => console.error(error));
+    </script>
+    <!-- script vendite time series -->
+
+
+    <!-- tipologie bar chart -->
+    <script>
+      // Fetch data from the REST controller endpoint
+      fetch("/admin/api/acquisti-time-series")
+        .then((response) => response.json())
+        .then((data) => {
+          // Extract the labels and dataValues from the JSON data
+          const labels = data.map((item) => item.nome);
+          const dataValues = data.map((item) => item.quantity);
+
+          // Get the canvas element and create a bar chart
+          const ctx = document.getElementById("barChart").getContext("2d");
+          const barChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Quantità",
+                  data: dataValues,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.5)",
+                    "rgba(255, 206, 86, 0.5)",
+                    "rgba(75, 192, 192, 0.5)",
+                    // You can add more background colors if needed
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    // You can add more border colors if needed
+                  ],
+                  borderWidth: 1,
+                },
+              ],
             },
             options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Month'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Value'
-                        }
-                    }
-                }
-            }
-        });
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: "Quantità",
+                  },
+                },
+              },
+            },
+          });
+        })
+        .catch((error) => console.error(error));
     </script>
 
-<!-- footer -->
-<footer th:replace="fragments/footer :: footer"></footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
 </html>

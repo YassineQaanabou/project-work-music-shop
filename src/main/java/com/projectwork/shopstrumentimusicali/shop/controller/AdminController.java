@@ -1,8 +1,12 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 import com.projectwork.shopstrumentimusicali.shop.Utils;
+import com.projectwork.shopstrumentimusicali.shop.model.Acquisto;
+import com.projectwork.shopstrumentimusicali.shop.model.Assortimento;
 import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
 import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
+import com.projectwork.shopstrumentimusicali.shop.repository.AcquistoRepository;
+import com.projectwork.shopstrumentimusicali.shop.repository.AssortimentoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
 import com.projectwork.shopstrumentimusicali.shop.repository.TipologiaRepository;
 import jakarta.validation.Valid;
@@ -14,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +29,37 @@ public class AdminController {
     private TipologiaRepository tipologiaRepository;
     @Autowired
     private StrumentoRepository strumentoRepository;
+    @Autowired
+    private AcquistoRepository acquistoRepository;
+    @Autowired
+    private AssortimentoRepository assortimentoRepository;
     @GetMapping
-    public String adminPage(){
+    public String adminPage(Model model){
+        // profit and loss
+        // .. calcolo la spesa totale
+        BigDecimal spesaTotale=new BigDecimal("0");
+        List<Assortimento> assortimenti= assortimentoRepository.findAll();
+        for (Assortimento a : assortimenti){
+            spesaTotale=spesaTotale.add(a.getTotale());
+        }
+
+        // vendite totali e calcolo ricavo
+        int venditeTotali=0;
+        BigDecimal ricavo=new BigDecimal("0");
+        List<Acquisto> acquisti=acquistoRepository.findAll();
+       for (Acquisto a : acquisti){
+           venditeTotali+=a.getQuantity();
+           // modifico il ricavo
+           // ... calcolo il prezzo totale
+           BigDecimal prezzoTotale= a.getStrumento().getPrezzo().multiply(BigDecimal.valueOf(a.getQuantity()));
+           //.. il ricavo è la somma dei prezzi totali
+           ricavo=ricavo.add(prezzoTotale);
+       }
+       BigDecimal profitto=ricavo.subtract(spesaTotale);
+        System.out.println(ricavo);
+        System.out.println(spesaTotale);
+        model.addAttribute("profitto",profitto);
+       model.addAttribute("venditeTotali",venditeTotali);
         return "admin/admin-page";
     }
     //  CRUD PER LE TIPOLOGIE DALL ADMIN
