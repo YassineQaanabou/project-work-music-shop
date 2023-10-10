@@ -112,7 +112,7 @@ public class IndexController {
 
         model.addAttribute("strumenti", strumentiTrovati);
 
-        return "customer/strumenti/list";
+        return "admin/strumenti/list";
     }
     @GetMapping("/cerca-per-tipologia")
     public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
@@ -121,7 +121,7 @@ public class IndexController {
         List<Strumento> strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
 
         model.addAttribute("strumenti", strumentiPerTipologia);
-        return "customer/strumenti/list";
+        return "admin/strumenti/list";
     }
 
 

@@ -149,6 +149,8 @@ public class AdminController {
             Optional<Strumento> strumentoOptional = Optional.ofNullable(magazzino.getStrumento());
             if (strumentoOptional.isPresent()) {
                 strumentiPerQuantita.add(strumentoOptional.get());
+            } else {
+                strumentiPerQuantita = strumentoRepository.findAll();
             }
         }
 
@@ -156,6 +158,14 @@ public class AdminController {
 
         return "admin/strumenti/list";
     }
+    @GetMapping("/cerca-per-tipologia")
+    public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
+        List<Tipologia> listaTipologie = tipologiaRepository.findAll();
+        model.addAttribute("tipologie", listaTipologie);
+        List<Strumento> strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
 
+        model.addAttribute("strumenti", strumentiPerTipologia);
+        return "admin/strumenti/list";
+    }
 
 }
