@@ -25,7 +25,7 @@
       <input class="form-control me-2" type="number" placeholder="Cerca per quantità" aria-label="Search" name="quantity" required>
       <button class="btn btn-outline-success" type="submit">Cerca per quantità</button>
     </form>
-    <form method="GET" action="/admin/cerca-per-tipologia">
+    <form method="GET" th:action="/admin/cerca-per-tipologia" th:object="${tipologie}">
 
       <label for="tipologiaSlug">Tipologia:</label>
       <select name="tipologiaSlug" id="tipologiaSlug">

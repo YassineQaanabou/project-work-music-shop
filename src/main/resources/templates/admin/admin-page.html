@@ -62,17 +62,21 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title fs-6 text-secondary">Profitto</h5>
-              <p class="card-text fs-2 fw-bold text-dark" th:text="${profitto}">
-
-              </p>
+              <p
+                class="card-text fs-2 fw-bold text-dark"
+                th:text="${profitto}"
+              ></p>
             </div>
           </div>
         </div>
         <div class="col-3 d-flex flex-column justify-content-center">
-          <div class="card  bg-light-subtle">
+          <div class="card bg-light-subtle">
             <div class="card-body">
               <h6 class="card-title fs-6 text-secondary">Vendite Totali</h6>
-              <p class="card-text big-text text-dark" th:text="${venditeTotali}"></p>
+              <p
+                class="card-text big-text text-dark"
+                th:text="${venditeTotali}"
+              ></p>
             </div>
           </div>
         </div>
@@ -85,6 +89,9 @@
       <div class="row">
         <div class="col-6 mx-auto p-5">
           <canvas id="barChart" width="200" height="100"></canvas>
+        </div>
+        <div class="col-6">
+          <canvas id="lineChart" width="200" height="100"></canvas>
         </div>
       </div>
     </div>
@@ -127,12 +134,66 @@
         .catch((error) => console.error(error));
     </script>
     <!-- script vendite time series -->
+    <script>
+      const dataset1Labels = ['2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01'];
+const dataset1Data = [10, 15, 12, 17, 14];
 
+const dataset2Labels = ['2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01'];
+const dataset2Data = [5, 8, 6, 9, 7];
+
+// Create a line chart
+var ctx = document.getElementById('lineChart').getContext('2d');
+var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: dataset1Labels, // You can use one set of labels for both datasets if they share the same X-axis
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: dataset1Data,
+                borderColor: 'rgba(255, 99, 132, 1)', // Red color
+                fill: false
+            },
+            {
+                label: 'Dataset 2',
+                data: dataset2Data,
+                borderColor: 'rgba(54, 162, 235, 1)', // Blue color
+                fill: false
+            }
+        ]
+    },
+    options: {
+        scales: {
+            x: {
+                type: 'time', // Use time scale for X-axis
+                time: {
+                    unit: 'month', // Specify the time unit (e.g., 'month', 'day', 'year')
+                    displayFormats: {
+                        month: 'MMM YYYY' // Format for displaying the month and year
+                    },
+                },
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Value'
+                }
+            }
+        }
+    }
+});
+
+    </script>
 
     <!-- tipologie bar chart -->
     <script>
       // Fetch data from the REST controller endpoint
-      fetch("/admin/api/acquisti-time-series")
+      fetch("/admin/api/acquisti-per-tipologia")
         .then((response) => response.json())
         .then((data) => {
           // Extract the labels and dataValues from the JSON data

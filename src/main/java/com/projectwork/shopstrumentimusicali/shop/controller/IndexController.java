@@ -48,8 +48,10 @@ public class IndexController {
 
     @GetMapping("/catalogo")
     public String catalogo(Model model) {
+        List<Tipologia> tipologie=tipologiaRepository.findAll();
         List<Strumento> strumenti = strumentoRepository.findAll();
         model.addAttribute("strumenti", strumenti);
+        model.addAttribute("tipologie", tipologie);
         return "customer/strumenti/list";
     }
 
