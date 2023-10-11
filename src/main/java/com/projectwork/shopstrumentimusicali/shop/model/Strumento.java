@@ -35,7 +35,8 @@ public class Strumento {
     @Min(0)
     private BigDecimal prezzo;
     @OneToMany(mappedBy = "strumento")
-    private List<Acquisto> acquisti;
+    @JsonIgnore
+    private List<Acquisto> acquisti = new ArrayList<>();
 
     @OneToMany(mappedBy = "strumento")
     private List<Assortimento> assortimenti;
