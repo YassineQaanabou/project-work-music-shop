@@ -35,9 +35,9 @@ public class IndexController {
     // homepage
     @GetMapping
     public String homepage(Model model) {
-        List<Strumento> strumentiPiuVendutiMese= strumentoRepository.findTopSellingInLastMonth(LocalDate.now().minusMonths(1));
+        List<Strumento> strumentiPiuVendutiMese = strumentoRepository.findTopSellingInLastMonth(LocalDate.now().minusMonths(1));
 
-        model.addAttribute("strumentiPiuVendutiMese",strumentiPiuVendutiMese);
+        model.addAttribute("strumentiPiuVendutiMese", strumentiPiuVendutiMese);
 
         List<Tipologia> tipologie = tipologiaRepository.findAll();
 
@@ -68,19 +68,19 @@ public class IndexController {
         Optional<Strumento> strumentoOptional = strumentoRepository.findBySlug(strumentoSlug);
         Strumento strumento = strumentoOptional.get();
         model.addAttribute("strumento", strumento);
-        model.addAttribute("tipologia",tipologiaRepository.findBySlug(tipologiaSlug).get());
+        model.addAttribute("tipologia", tipologiaRepository.findBySlug(tipologiaSlug).get());
 
-        model.addAttribute("acquisto",new Acquisto());
+        model.addAttribute("acquisto", new Acquisto());
         return "customer/strumenti/details";
 
     }
 
     @PostMapping("/{tipologiaSlug}/{strumentoSlug}")
 
-    public String doBuy(@Valid @ModelAttribute("acquisto") Acquisto formAcquisto, BindingResult bindingResult, @PathVariable("tipologiaSlug") String tipologiaSlug, @PathVariable("strumentoSlug") String strumentoSlug, Model model){
-        if(bindingResult.hasErrors()){
-            model.addAttribute("tipologia",tipologiaRepository.findBySlug(tipologiaSlug).get());
-            model.addAttribute("strumento",strumentoRepository.findBySlug(strumentoSlug).get());
+    public String doBuy(@Valid @ModelAttribute("acquisto") Acquisto formAcquisto, BindingResult bindingResult, @PathVariable("tipologiaSlug") String tipologiaSlug, @PathVariable("strumentoSlug") String strumentoSlug, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tipologia", tipologiaRepository.findBySlug(tipologiaSlug).get());
+            model.addAttribute("strumento", strumentoRepository.findBySlug(strumentoSlug).get());
             return "customer/strumenti/details";
         }
         // aggiungo lo strumento
@@ -90,13 +90,46 @@ public class IndexController {
         // salvo nel db
         acquistoRepository.save(formAcquisto);
         // modifico la quantita disponibile magazzione
-        Strumento strumentoResult=strumentoRepository.findBySlug(strumentoSlug).get();
-        Magazzino magazzino=magazzinoRepository.findByStrumento(strumentoResult).get();
-        magazzino.setQuantity(magazzino.getQuantity()-formAcquisto.getQuantity());
+        Strumento strumentoResult = strumentoRepository.findBySlug(strumentoSlug).get();
+        Magazzino magazzino = magazzinoRepository.findByStrumento(strumentoResult).get();
+        magazzino.setQuantity(magazzino.getQuantity() - formAcquisto.getQuantity());
         magazzino.setId(magazzino.getId());
         magazzinoRepository.save(magazzino);
         return "redirect:/";
 
     }
+
+    @GetMapping("/cerca")
+    public String cercaStrumento(
+            @RequestParam(value = "q", required = false) String searchString,
+            @RequestParam(value = "prezzoMin", required = false) Double prezzoMin,
+            @RequestParam(value = "prezzoMax", required = false) Double prezzoMax,
+            Model model
+    ) {
+
+        List<Strumento> strumentiTrovati = strumentoRepository.findByCustomSearchQuery(searchString, prezzoMin, prezzoMax);
+
+
+        model.addAttribute("strumenti", strumentiTrovati);
+
+        return "customer/strumenti/list";
+    }
+    @GetMapping("/cerca-per-tipologia")
+    public String cercaPerTipologia(@RequestParam(value = "tipologiaSlug", required = false) String tipologiaSlug, Model model) {
+        List<Tipologia> listaTipologie = tipologiaRepository.findAll();
+        model.addAttribute("tipologie", listaTipologie);
+
+        List<Strumento> strumentiPerTipologia;
+
+        if (tipologiaSlug != null && !tipologiaSlug.isBlank()) {
+            strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
+        } else {
+            strumentiPerTipologia = strumentoRepository.findAll(); // Carica tutti gli strumenti
+        }
+
+        model.addAttribute("strumenti", strumentiPerTipologia);
+        return "customer/strumenti/list";
+    }
+
 
 }
