@@ -69,9 +69,9 @@ public class AdminController {
     @GetMapping("/tipologie/{slug}/edit")
     public String edit(@PathVariable("slug") String slug, Model model) {
         // cerco tipologie slug
-        Optional<Tipologia> result = tipologiaRepository.findBySlug(slug);
-        if (result.isPresent()) {
-            model.addAttribute("tipologia", result.get());
+        Tipologia result = tipologiaRepository.findBySlug(slug);
+        if (result != null) {
+            model.addAttribute("tipologia", result);
             return "admin/tipologie/form";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tipologia con slug " + slug + " non trovata");

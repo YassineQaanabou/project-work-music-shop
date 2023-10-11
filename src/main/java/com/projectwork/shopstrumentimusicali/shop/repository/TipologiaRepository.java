@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface TipologiaRepository extends JpaRepository<Tipologia, Integer>{
-    Optional<Tipologia> findBySlug(String slug);
+    public Tipologia findBySlug(String slug);
 }

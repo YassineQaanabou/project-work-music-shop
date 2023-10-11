@@ -58,8 +58,11 @@ public class IndexController {
     @GetMapping("/{tipologiaSlug}")
     public String strumenti(@PathVariable("tipologiaSlug") String tipologiaSlug, Model model) {
         Optional<Tipologia> tipologiaOptional = tipologiaRepository.findBySlug(tipologiaSlug);
+        if (tipologiaOptional != null && tipologiaOptional.get() != null){
+
         Tipologia tipologia = tipologiaOptional.get();
         List<Strumento> strumenti = strumentoRepository.findByTipologia(tipologia);
+        }
         model.addAttribute("strumenti", strumenti);
         return "customer/strumenti/list";
 
