@@ -8,4 +8,10 @@ import java.util.List;
 public interface FornitoreStrumentoRepository extends JpaRepository<FornitoreStrumento, Integer> {
 
     List<FornitoreStrumento> findByStrumentoId(Integer strumentoId);
+
+    List<FornitoreStrumento> findByFornitoreId(Integer fornitoreId);
+
+    FornitoreStrumento findByFornitoreIdAndStrumentoId(Integer fornitoreId, Integer strumentoId);
+
+
 }

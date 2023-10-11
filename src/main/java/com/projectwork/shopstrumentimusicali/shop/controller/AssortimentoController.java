@@ -65,19 +65,21 @@ public class AssortimentoController {
             return "/admin/assortimenti/form";
         }
 
+        Strumento strumento = strumentoRepository.findBySlug(slugNome).get();
+        FornitoreStrumento fornitura = fornitoreStrumentoRepository.findByFornitoreIdAndStrumentoId(assortimentoForm.getFornitore().getId(), strumento.getId());
+
         // setto la data
         assortimentoForm.setData(LocalDate.now());
         // setto lo strumento
-        Strumento strumentoResult = strumentoRepository.findBySlug(slugNome).get();
-        assortimentoForm.setStrumento(strumentoResult);
+        assortimentoForm.setStrumento(strumento);
         // calcolo e setto il prezzo (prezzo * quantity)
-        BigDecimal result = strumentoResult.getPrezzo();
+        BigDecimal result = fornitura.getPrezzo();
         BigDecimal totale = result.multiply(BigDecimal.valueOf(assortimentoForm.getQuantity()));
         assortimentoForm.setTotale(totale);
         // salvo nel db
         assortimentoRepository.save(assortimentoForm);
         // aumento le quantità in magazzino
-        Magazzino magazzino = magazzinoRepository.findByStrumento(strumentoResult).get();
+        Magazzino magazzino = magazzinoRepository.findByStrumento(strumento).get();
         magazzino.setQuantity(magazzino.getQuantity() + assortimentoForm.getQuantity());
         magazzino.setId(magazzino.getId());
         magazzinoRepository.save(magazzino);

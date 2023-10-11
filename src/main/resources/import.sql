@@ -38,16 +38,55 @@ INSERT INTO magazzino(quantity,strumento_id) VALUES (0,12);
 
 INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano','20833','Via 7','03243343',1)
 
-INSERT INTO fornitore(nome) VALUES ('amazon');
-INSERT INTO fornitore(nome) VALUES ('internet');
-INSERT INTO fornitore(nome) VALUES ('strada');
+INSERT INTO fornitore(nome, slug) VALUES ('amazon','amazon');
+INSERT INTO fornitore(nome, slug) VALUES ('internet','internet');
+INSERT INTO fornitore(nome, slug) VALUES ('ebay','ebay');
 
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 1, 500.99);
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 2, 1000.99);
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 3, 400.99);
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 1, 550.99);
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 2, 600.99);
-INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 3, 400.99);
+-- Inserisci i dati nella tabella fornitore_strumento per il primo strumento (Yamaha ARIUS YDP-145 Digital Piano)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 1, 480.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 2, 950.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 3, 450.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il secondo strumento (Donner Professionale Pianoforte)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 1, 520.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 2, 1050.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 3, 430.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il terzo strumento (Medeli Grand 510 BK)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 1, 2900.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 2, 3000.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 3, 2700.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il quarto strumento (Yamaha C40BLII Chitarra Classica)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (4, 1, 140.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il quinto strumento (Gibson Hummingbird Studio RW Natural)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (5, 1, 3300.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il sesto strumento (Cordoba 55 FCE Negra Ziricote)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 1, 1600.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 2, 1700.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 3, 1500.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il settimo strumento (Btuty Sassofono)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (7, 1, 260.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (7, 2, 280.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per l'ottavo strumento (soundman Tuyama TAS-131)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (8, 1, 320.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il nono strumento (Odyssey OAS130)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (9, 1, 470.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il decimo strumento (NATAL - DNA STEALTH KIT)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 1, 450.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 2, 900.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 3, 400.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per l'undicesimo strumento (XDrum Semi 20)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (11, 1, 340.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (11, 2, 680.00);
+
 
 
 
@@ -59,11 +98,11 @@ INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",1
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",2,4);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-01",5,1);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-02",1,2);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-12-03",1,12);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-03",1,12);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-05",4,8);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",2,11);
 INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",1,3);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",2,5);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-07",2,5);
 
 
 
