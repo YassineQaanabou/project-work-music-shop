@@ -22,7 +22,7 @@
   <!-- form mappato sull'oggetto strumento -->
   <div class="row">
     <form
-            th:action="${tipologia.id != null} ? @{/admin/tipologie/{slug}/edit(slug = ${tipologia.slug})} : @{/admin/tipologie/crea}"
+            th:action="${tipologia.id != null} ? @{/admin/tipologie/{slug}/edit(slug=${tipologia.slug})} : @{/admin/tipologie/crea}"
 
             id="tipologie-form"
             method="POST"

@@ -23,7 +23,7 @@ public class AcquistoRestController {
         return acquisti;
     }
 
-    @GetMapping("/acquisti-time-series")
+    @GetMapping("/acquisti-per-tipologia")
     public List<TipologiaVenditaDto> acquistiTimeList(){
         List<Object[]> risultati = acquistoRepository.findAcquistiPerTipologia();
 
@@ -40,6 +40,7 @@ public class AcquistoRestController {
         return risultatiDTO;
     }
 
+        // profitto e
 
 
 }

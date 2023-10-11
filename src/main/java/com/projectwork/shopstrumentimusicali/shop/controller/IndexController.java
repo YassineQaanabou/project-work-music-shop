@@ -48,8 +48,10 @@ public class IndexController {
 
     @GetMapping("/catalogo")
     public String catalogo(Model model) {
+        List<Tipologia> tipologie=tipologiaRepository.findAll();
         List<Strumento> strumenti = strumentoRepository.findAll();
         model.addAttribute("strumenti", strumenti);
+        model.addAttribute("tipologie", tipologie);
         return "customer/strumenti/list";
     }
 
@@ -101,7 +103,7 @@ public class IndexController {
 
     @GetMapping("/cerca")
     public String cercaStrumento(
-            @RequestParam( value = "q", required = false ) String searchString,
+            @RequestParam(value = "q", required = false) String searchString,
             @RequestParam(value = "prezzoMin", required = false) Double prezzoMin,
             @RequestParam(value = "prezzoMax", required = false) Double prezzoMax,
             Model model
@@ -112,6 +114,22 @@ public class IndexController {
 
         model.addAttribute("strumenti", strumentiTrovati);
 
+        return "customer/strumenti/list";
+    }
+    @GetMapping("/cerca-per-tipologia")
+    public String cercaPerTipologia(@RequestParam(value = "tipologiaSlug", required = false) String tipologiaSlug, Model model) {
+        List<Tipologia> listaTipologie = tipologiaRepository.findAll();
+        model.addAttribute("tipologie", listaTipologie);
+
+        List<Strumento> strumentiPerTipologia;
+
+        if (tipologiaSlug != null && !tipologiaSlug.isBlank()) {
+            strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
+        } else {
+            strumentiPerTipologia = strumentoRepository.findAll(); // Carica tutti gli strumenti
+        }
+
+        model.addAttribute("strumenti", strumentiPerTipologia);
         return "customer/strumenti/list";
     }
 
