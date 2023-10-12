@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +30,34 @@ public class AdminController {
     private FornitoreStrumentoRepository fornitoreStrumentoRepository;
     @Autowired
     private MagazzinoRepository magazzinoRepository;
+    @Autowired
+    private AssortimentoRepository assortimentoRepository;
+    @Autowired
+    private AcquistoRepository acquistoRepository;
 
     @GetMapping
-    public String adminPage() {
+    public String adminPage(Model model) {
+        // calcolo il totale delgi assortimenti
+        List<Assortimento> assortimentiList =assortimentoRepository.findAll();
+        BigDecimal totaleAssortimenti =new BigDecimal(0);
+        for (Assortimento a : assortimentiList){
+            totaleAssortimenti.add(a.getTotale());
+        }
+        System.out.println(totaleAssortimenti);
+        // calcolo il totale dei profitti
+        List<Acquisto> acquistiList= acquistoRepository.findAll();
+        BigDecimal totaleAcquisti= new BigDecimal(0);
+        for (Acquisto a : acquistiList){
+            totaleAcquisti=totaleAcquisti.add(a.getStrumento().getPrezzo().multiply(BigDecimal.valueOf(a.getQuantity())));
+        }
+        System.out.println(totaleAcquisti);
+        BigDecimal profitto=totaleAcquisti.subtract(totaleAssortimenti);
+        System.out.println(profitto);
+        // calcolo il numero di vendite totali
+        int venditeTotali= acquistoRepository.findAll().size();
+        // passo al modello
+        model.addAttribute("profitto",profitto);
+        model.addAttribute("venditeTotali",venditeTotali);
         return "admin/admin-page";
     }
 

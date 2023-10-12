@@ -87,11 +87,11 @@
 
       <!-- row sales vendite nel tempo -->
       <div class="row">
-        <div class="col-6 mx-auto p-5">
+        <div class="col-5 mx-auto ">
           <canvas id="barChart" width="200" height="100"></canvas>
         </div>
-        <div class="col-6">
-          <canvas id="lineChart" width="200" height="100"></canvas>
+        <div class="col-7 pt-2 ">
+          <canvas id="profitChart" width="200" height="100"></canvas>
         </div>
       </div>
     </div>
@@ -135,61 +135,55 @@
     </script>
     <!-- script vendite time series -->
     <script>
-      const dataset1Labels = ['2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01'];
-const dataset1Data = [10, 15, 12, 17, 14];
+    // Fetch data from the API
+    fetch("/admin/api/profitto")
+      .then(response => response.json())
+      .then(data => {
+        // Format the dates to display only the day
+      const labels = data.map(item => {
+  const date = new Date(item.data);
+  const month = date.toLocaleString('default', { month: 'long' }); // Get the month name
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+});
+        const profit = data.map(item => item.profittoCumulativo);
 
-const dataset2Labels = ['2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01'];
-const dataset2Data = [5, 8, 6, 9, 7];
-
-// Create a line chart
-var ctx = document.getElementById('lineChart').getContext('2d');
-var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: dataset1Labels, // You can use one set of labels for both datasets if they share the same X-axis
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: dataset1Data,
-                borderColor: 'rgba(255, 99, 132, 1)', // Red color
-                fill: false
-            },
-            {
-                label: 'Dataset 2',
-                data: dataset2Data,
-                borderColor: 'rgba(54, 162, 235, 1)', // Blue color
-                fill: false
-            }
-        ]
-    },
-    options: {
-        scales: {
-            x: {
-                type: 'time', // Use time scale for X-axis
-                time: {
-                    unit: 'month', // Specify the time unit (e.g., 'month', 'day', 'year')
-                    displayFormats: {
-                        month: 'MMM YYYY' // Format for displaying the month and year
-                    },
-                },
+        const ctx = document.getElementById("profitChart").getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Profitto",
+                data: profit,
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
                 title: {
-                    display: true,
-                    text: 'Date'
-                }
-            },
-            y: {
+                  display: true,
+                  
+                },
+              },
+              y: {
                 beginAtZero: true,
                 title: {
-                    display: true,
-                    text: 'Value'
-                }
-            }
-        }
-    }
-});
-
-    </script>
-
+                  display: true,
+                  text: "Profitto ",
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
     <!-- tipologie bar chart -->
     <script>
       // Fetch data from the REST controller endpoint
