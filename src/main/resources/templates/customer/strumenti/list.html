@@ -57,16 +57,14 @@
                   th:text="${strumento.descrizione}"
           ></p>
           <p class="card-text fw-bold" th:text="${strumento.tipologia}"></p>
-          <a
-                  th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}"
-          >dettagli</a
-          >
+          <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}"
+                  class="btn btn-primary" >dettagli</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<!--
 <div class="container">
   <div class="row">
     <div class="col" th:each="strumento : ${strumenti}">
@@ -86,7 +84,7 @@
     </div>
   </div>
 </div>
-
+-->
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script
