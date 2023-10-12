@@ -11,5 +11,6 @@ public interface FornitoreStrumentoRepository extends JpaRepository<FornitoreStr
     List<FornitoreStrumento> findByStrumentoId(Integer strumentoId);
     List<FornitoreStrumento> findByFornitoreId(Integer fornitoreId);
     List <FornitoreStrumento> findByFornitore (Fornitore fornitore);
-
+    FornitoreStrumento findByFornitoreIdAndStrumentoId(Integer fornitoreId, Integer strumentoId);
 }
+

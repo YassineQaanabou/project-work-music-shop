@@ -38,17 +38,7 @@
       </select>
       <button type="submit">Cerca</button>
     </form>
-    <label for="fornitori">Fornitori:</label>
-    <form th:action="@{/admin/trova-fornitori-per-strumento}" method="get">
-      <select name="fornitori" id="fornitori">
-        <option value="">Seleziona un fornitore</option>
-        <option th:each="fornitore : ${fornitori}"
-                th:value="${fornitore.id}"
-                th:text="${fornitore.nome}"></option>
 
-      </select>
-      <button type="submit">Cerca</button>
-    </form>
     <canvas id="strumentiChart" width="400" height="100"></canvas>
 
     <a th:href="@{/admin/strumenti/crea}">crea uno strumento</a>

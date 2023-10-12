@@ -40,26 +40,26 @@ public class AdminController {
 
 
         // calcolo il totale delgi assortimenti
-        List<Assortimento> assortimentiList =assortimentoRepository.findAll();
-        BigDecimal totaleAssortimenti =new BigDecimal(0);
-        for (Assortimento a : assortimentiList){
+        List<Assortimento> assortimentiList = assortimentoRepository.findAll();
+        BigDecimal totaleAssortimenti = new BigDecimal(0);
+        for (Assortimento a : assortimentiList) {
             totaleAssortimenti.add(a.getTotale());
         }
         System.out.println(totaleAssortimenti);
         // calcolo il totale dei profitti
-        List<Acquisto> acquistiList= acquistoRepository.findAll();
-        BigDecimal totaleAcquisti= new BigDecimal(0);
-        for (Acquisto a : acquistiList){
-            totaleAcquisti=totaleAcquisti.add(a.getStrumento().getPrezzo().multiply(BigDecimal.valueOf(a.getQuantity())));
+        List<Acquisto> acquistiList = acquistoRepository.findAll();
+        BigDecimal totaleAcquisti = new BigDecimal(0);
+        for (Acquisto a : acquistiList) {
+            totaleAcquisti = totaleAcquisti.add(a.getStrumento().getPrezzo().multiply(BigDecimal.valueOf(a.getQuantity())));
         }
         System.out.println(totaleAcquisti);
-        BigDecimal profitto=totaleAcquisti.subtract(totaleAssortimenti);
+        BigDecimal profitto = totaleAcquisti.subtract(totaleAssortimenti);
         System.out.println(profitto);
         // calcolo il numero di vendite totali
-        int venditeTotali= acquistoRepository.findAll().size();
+        int venditeTotali = acquistoRepository.findAll().size();
         // passo al modello
-        model.addAttribute("profitto",profitto);
-        model.addAttribute("venditeTotali",venditeTotali);
+        model.addAttribute("profitto", profitto);
+        model.addAttribute("venditeTotali", venditeTotali);
         return "admin/admin-page";
     }
 
@@ -194,30 +194,6 @@ public class AdminController {
         List<Strumento> strumentiPerTipologia = strumentoRepository.findByTipologiaSlug(tipologiaSlug);
 
         model.addAttribute("strumenti", strumentiPerTipologia);
-        return "admin/strumenti/list";
-    }
-
-    @GetMapping("/trova-fornitori-per-strumento")
-    public String trovaFornitoriPerStrumento(@RequestParam("fornitoreId") Integer fornitoreId, @RequestParam("strumentoId") Integer strumentoId, Model model) {
-        List<FornitoreStrumento> fornitori = fornitoreStrumentoRepository.findByStrumentoId(strumentoId);
-        Optional<Strumento> strumentoOptional = strumentoRepository.findById(strumentoId);
-        List<Strumento> strumentiPerFornitori = new ArrayList<>();
-        List<Fornitore> listaFornitori = new ArrayList<>(); // Aggiungi questa lista
-
-        if (strumentoOptional.isPresent()) {
-            Strumento strumento = strumentoOptional.get();
-
-            for (FornitoreStrumento fornitoreStrumento : fornitori) {
-                listaFornitori.add(fornitoreStrumento.getFornitore()); // Aggiungi il fornitore alla lista
-                if (fornitoreStrumento.getFornitore().getId().equals(fornitoreId)) {
-                    strumentiPerFornitori.add(strumento);
-                }
-            }
-        }
-
-        model.addAttribute("strumentiPerFornitori", strumentiPerFornitori);
-        model.addAttribute("listaFornitori", fornitori); // Aggiungi la lista dei fornitori al model
-
         return "admin/strumenti/list";
     }
 
