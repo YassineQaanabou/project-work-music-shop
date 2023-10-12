@@ -37,6 +37,8 @@ public class AdminController {
 
     @GetMapping
     public String adminPage(Model model) {
+
+
         // calcolo il totale delgi assortimenti
         List<Assortimento> assortimentiList =assortimentoRepository.findAll();
         BigDecimal totaleAssortimenti =new BigDecimal(0);
