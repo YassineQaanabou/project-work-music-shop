@@ -1,6 +1,5 @@
 package com.projectwork.shopstrumentimusicali.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -38,17 +37,20 @@ public class Strumento {
     @Min(0)
     private BigDecimal prezzo;
     @OneToMany(mappedBy = "strumento")
-    private List<Acquisto> acquisti;
+    @JsonIgnore
+    private List<Acquisto> acquisti = new ArrayList<>();
 
     @OneToMany(mappedBy = "strumento")
     private List<Assortimento> assortimenti;
 
     @OneToOne(mappedBy = "strumento")
-
     private Magazzino magazzino;
 
+    @OneToMany(mappedBy = "strumento")
+    private List<FornitoreStrumento> fornitoreStrumento;
 
-// getter e setter
+
+    // getter e setter
     public Magazzino getMagazzino() {
         return magazzino;
     }
@@ -73,7 +75,9 @@ public class Strumento {
         this.acquisti = acquisti;
     }
 
-
+    public void setFornitoreStrumento(List<FornitoreStrumento> fornitoreStrumento) {
+        this.fornitoreStrumento = fornitoreStrumento;
+    }
 
     public Integer getId() {
         return id;
@@ -97,6 +101,10 @@ public class Strumento {
 
     public BigDecimal getPrezzo() {
         return prezzo;
+    }
+
+    public List<FornitoreStrumento> getFornitoreStrumento() {
+        return fornitoreStrumento;
     }
 
     public void setId(Integer id) {
@@ -123,6 +131,7 @@ public class Strumento {
         this.prezzo = prezzo;
     }
 
+
     public String getSlug() {
         return slug;
     }
@@ -130,4 +139,6 @@ public class Strumento {
     public void setSlug(String slug) {
         this.slug = slug;
     }
+
+
 }

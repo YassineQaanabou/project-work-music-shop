@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <title>Aggiungi fornitura</title>
+</head>
+<body>
+<div class="d-flex text-center mx-auto row w-75">
+    <form
+            id="fornitura-form"
+            th:object="${fornitura}"
+            th:action="@{/fornitura/{slug}/crea(slug=${fornitore.slug})}"
+            method="post">
+
+
+        <div class="form-group">
+            <label for="strumento">strumento:</label>
+            <select class="form-control" id="strumento" th:field="*{strumento}">
+                <option th:each="strumento : ${strumenti}" th:value="${strumento.id}"
+                        th:text="${strumento.nome}"></option>
+            </select>
+        </div>
+
+        <label for="prezzo" class="form-label">Prezzo</label>
+        <input type="text" class="form-control" id="prezzo" th:field="*{prezzo}" th:errorClass="is-invalid">
+        <div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
+            <ul>
+                <li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}"></li>
+            </ul>
+        </div>
+
+
+        <hr>
+
+        <button type="submit" class="btn btn-warning">Save</button>
+        <a class="btn btn-warning" th:href="@{/fornitore}">Cancel</a>
+
+
+    </form>
+</div>
+</body>
+</html>

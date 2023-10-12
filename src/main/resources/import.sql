@@ -3,6 +3,9 @@ INSERT INTO tipologia (nome,slug,url_foto) VALUES('chitarre','chitarre','https:/
 INSERT INTO tipologia (nome,slug,url_foto) VALUES('sassofoni','sassofoni','https://m.media-amazon.com/images/I/71S4Ef7BQpL.jpg');
 INSERT INTO tipologia (nome,slug,url_foto) VALUES('batterie','batterie','https://www.tuttomusicasrl.it/wp-content/uploads/2022/05/BATTERIA-ACUSTICA-SOUNDSATION-JDK100-BL-JUNIOR-PER-BAMBINI-2.png');
 
+
+
+
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Yamaha ARIUS YDP-145 Digital Piano', 'https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg', 'Pianoforte Digitale da Casa per Dilettanti, Design Classico ed Elegante, Suonabilità Autentica del Pianoforte Acustico, Bianco', 912.99, 'yamaha-arius-ydp-145-digital-piano');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Donner Professionale Pianoforte', 'https://m.media-amazon.com/images/I/61sp7SOrwAL._AC_SL1485_.jpg', 'Digitale 88 Tasti Pesati con Supporto per Pianoforte e Pedale, Full Weighted Piano Elettroniche Fullsize per Principianti, DEP-20S', 529.00, 'donner-professionale-pianoforte');
 INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) VALUES (1, 'Medeli Grand 510 BK', 'https://m.media-amazon.com/images/I/51b7QNffLAL._AC_SL1200_.jpg', 'Pianoforte Digitale a Coda', 3049.00, 'medeli-grand-510-bk');
@@ -19,7 +22,7 @@ INSERT INTO strumento (tipologia_id, nome, url_foto, descrizione, prezzo, slug) 
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Rossi','Mariorossi7@gmail.com','password',true);
 INSERT INTO utente(nome,cognome,email,password,registrato )VALUES ('Mario','Bianchi','Mariobianchi7@gmail.com',null,false);
 
-INSERT INTO magazzino(quantity,strumento_id) VALUES (1,1);
+INSERT INTO magazzino(quantity,strumento_id) VALUES (0,1);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,2);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,3);
 INSERT INTO magazzino(quantity,strumento_id) VALUES (0,4);
@@ -35,9 +38,71 @@ INSERT INTO magazzino(quantity,strumento_id) VALUES (0,12);
 
 INSERT INTO dati_utente(citta,cap,indirizzo,telefono,utente_id) VALUES ('Milano','20833','Via 7','03243343',1)
 
+INSERT INTO fornitore(nome, slug) VALUES ('amazon','amazon');
+INSERT INTO fornitore(nome, slug) VALUES ('internet','internet');
+INSERT INTO fornitore(nome, slug) VALUES ('ebay','ebay');
+
+-- Inserisci i dati nella tabella fornitore_strumento per il primo strumento (Yamaha ARIUS YDP-145 Digital Piano)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 1, 480.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 2, 950.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (1, 3, 450.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il secondo strumento (Donner Professionale Pianoforte)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 1, 520.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 2, 1050.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (2, 3, 430.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il terzo strumento (Medeli Grand 510 BK)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 1, 2900.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 2, 3000.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (3, 3, 2700.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il quarto strumento (Yamaha C40BLII Chitarra Classica)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (4, 1, 140.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il quinto strumento (Gibson Hummingbird Studio RW Natural)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (5, 1, 3300.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il sesto strumento (Cordoba 55 FCE Negra Ziricote)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 1, 1600.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 2, 1700.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (6, 3, 1500.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il settimo strumento (Btuty Sassofono)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (7, 1, 260.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (7, 2, 280.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per l'ottavo strumento (soundman Tuyama TAS-131)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (8, 1, 320.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il nono strumento (Odyssey OAS130)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (9, 1, 470.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per il decimo strumento (NATAL - DNA STEALTH KIT)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 1, 450.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 2, 900.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (10, 3, 400.00);
+
+-- Inserisci i dati nella tabella fornitore_strumento per l'undicesimo strumento (XDrum Semi 20)
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (11, 1, 340.00);
+INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (11, 2, 680.00);
 
 
 
+
+
+
+
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",3,2);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",1,7);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",2,4);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-01",5,1);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-02",1,2);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-03",1,12);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-05",4,8);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",2,11);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",1,3);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-07",2,5);
 
 
 

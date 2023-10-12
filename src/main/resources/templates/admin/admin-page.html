@@ -1,208 +1,248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2018',  950,      850],
-          ['2019',  1000,      750],
-          ['2020',  850,      600],
-          ['2021',  700,      460],
-          ['2022',  660,       1120],
-          ['2023',  1030,      840]
-        ]);
-
-        var options = {
-          title: 'Sales Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <style>
+      .card {
+        width: 200px;
+        height: 200px;
       }
+      .big-text {
+        font-size: 4em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <body class="bg-secondary-subtle">
+    <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+
+    <div class="container my-2">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <a
+            th:href="@{/admin/strumenti/crea}"
+            class="btn btn-outline-primary mx-1"
+            >Add Item</a
+          >
+          <a th:href="@{/admin/strumenti}" class="btn btn-outline-primary mx-1">
+            Item List</a
+          >
+          <a
+            th:href="@{/admin/assortimenti}"
+            class="btn btn-outline-primary mx-1"
+            >Assortimenti</a
+          >
+          <a th:href="@{/admin/acquisti}" class="btn btn-outline-primary mx-1"
+            >Vendite</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <div class="container">
+      <div class="row d-flex justify-content-around">
+        <div class="col-3 d-flex flex-column justify-content-center">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fs-6 text-secondary">Profitto</h5>
+              <p
+                class="card-text fs-2 fw-bold text-dark"
+                th:text="${profitto}"
+              ></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 d-flex flex-column justify-content-center">
+          <div class="card bg-light-subtle">
+            <div class="card-body">
+              <h6 class="card-title fs-6 text-secondary">Vendite Totali</h6>
+              <p
+                class="card-text big-text text-dark"
+                th:text="${venditeTotali}"
+              ></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 p-2">
+          <canvas id="pieChart" width="10" height="10" class="w-100"></canvas>
+        </div>
+      </div>
+
+      <!-- row sales vendite nel tempo -->
+      <div class="row">
+        <div class="col-5 mx-auto ">
+          <canvas id="barChart" width="200" height="100"></canvas>
+        </div>
+        <div class="col-7 pt-2 ">
+          <canvas id="profitChart" width="200" height="100"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="chart/chart.js"></script>
+
+    <!-- script pie chart -->
+    <script>
+      // Codice JavaScript per recuperare i dati dalla tua API REST
+      fetch("/admin/api/acquisti")
+        .then((response) => response.json())
+        .then((data) => {
+          // Estrai le etichette e i dati dai risultati
+          const labels = data.map((item) => item[0]); // Nome del prodotto
+          const dataValues = data.map((item) => item[1]); // Vendite totali
+
+          // Crea il grafico a torta con Chart.js
+          var ctx = document.getElementById("pieChart").getContext("2d");
+          var pieChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  data: dataValues,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.5)",
+                    "rgba(255, 206, 86, 0.5)",
+                    "rgba(75, 192, 192, 0.5)",
+                    "rgba(153, 102, 255, 0.5)",
+                    // Altri colori...
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+          });
+        })
+        .catch((error) => console.error(error));
+    </script>
+    <!-- script vendite time series -->
+    <script>
+    // Fetch data from the API
+    fetch("/admin/api/profitto")
+      .then(response => response.json())
+      .then(data => {
+        // Format the dates to display only the day
+      const labels = data.map(item => {
+  const date = new Date(item.data);
+  const month = date.toLocaleString('default', { month: 'long' }); // Get the month name
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+});
+        const profit = data.map(item => item.profittoCumulativo);
+
+        const ctx = document.getElementById("profitChart").getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Profitto",
+                data: profit,
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  
+                },
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Profitto ",
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
+    <!-- tipologie bar chart -->
+    <script>
+      // Fetch data from the REST controller endpoint
+      fetch("/admin/api/acquisti-per-tipologia")
+        .then((response) => response.json())
+        .then((data) => {
+          // Extract the labels and dataValues from the JSON data
+          const labels = data.map((item) => item.nome);
+          const dataValues = data.map((item) => item.quantity);
+
+          // Get the canvas element and create a bar chart
+          const ctx = document.getElementById("barChart").getContext("2d");
+          const barChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Quantità",
+                  data: dataValues,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.5)",
+                    "rgba(255, 206, 86, 0.5)",
+                    "rgba(75, 192, 192, 0.5)",
+                    // You can add more background colors if needed
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    // You can add more border colors if needed
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: "Quantità",
+                  },
+                },
+              },
+            },
+          });
+        })
+        .catch((error) => console.error(error));
     </script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Month', 'Number'],
-        ['January', 125],
-        ['February', 91],
-        ['March', 122],
-        ['May', 229],
-        ['June', 80],
-        ['July', 66],
-        ['August', 191],
-        ['September', 305],
-        ['October', 305],
-        ['November', 305],
-        ['December', 305],
-
-
-      var options = {
-      title: 'Monthly Visitors',
-      legend: { position: 'none' },
-      };
-
-      var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-      chart.draw(data, options);
-      }
-    </script>
-
-</head>
-
-<body>
-<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
-<div class="container my-2">
-<div class="row">
-  <div class="col d-flex justify-content-center">
-    <a th:href="@{/admin/strumenti/crea}" class="btn  btn-outline-primary mx-1">Add Item</a>
-    <a th:href="@{/admin/strumenti}" class="btn  btn-outline-primary mx-1"> Item List</a>
-    <a th:href="@{/admin/assortimenti}" class="btn  btn-outline-primary mx-1">Assortimenti</a>
-    <a th:href="@{/admin/acquisti}" class="btn  btn-outline-primary mx-1">Vendite</a>
-    </div>
-  </div>  
-</div>
-
-  <main>
-    <!--
-    <div class="container d-flex justify-content-around">
-      <div class="row col-3">
-        <h3 class="justify-content-center">Sales</h3>
-        <div class="card-body p-3 mb-5" id="sales" style="position: relative">
-          <img src="https://www.datapine.com/blog/wp-content/uploads/2020/07/averag-revenue-per-unit-datapine.png"
-            class ="card-img-top" alt="Sales Chart">
-          <!-/- aggiungere source pagina sales-/->
-        </div>
-      </div>
-
-      <div class="row col-3">
-        <h3 class="justify-content-center">Monthly Visitor</h3>
-        <div class="card-body p-3 mb-5" id="visitors" style="position: relative">
-          <img src="https://blog.hubspot.com/hs-fs/hubfs/how-many-visitors-should-your-site-get_6.webp?width=650&height=402&name=how-many-visitors-should-your-site-get_6.webp"
-               class ="card-img-top" alt="Visitor Chart">
-          <!-/- aggiungere source pagina visitors-/->
-        </div>
-      </div>
-    </div>
-
-      <!-/- chart example -/->
-
-      <div class="container">
-        <h1>Chart Example</h1>
-        <canvas id="visitors-chart" height="200" style="display: block; width: 517px; height: 200px;" width="517" class="chartjs-render-monitor"></canvas>
-      </div>
-    -->
-    <div>
-      <div>
-        <div id="curve_chart" style="width: 900px; height: 500px"></div>
-      </div>
-      <div>
-        <div id="chart_div" style="width: 900px; height: 500px;"></div>
-      </div>
-    </div>
-
-
-
-    <!--best seller | orizontal scroll-->
-    <div class="container py-2">
-      <h2 class="text-center">Best Seller</h2>
-      <div class="row g-3 flex-nowrap" style="overflow-x: auto;">
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-            <div class="card-body">
-              <h5 class="card-title">Card1</h5>
-              <p class="card-text">Info Card</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-              <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-              <div class="card-body">
-                <h5 class="card-title">Card2</h5>
-                <p class="card-text">Info Card</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-              <div class="card-body">
-                <h5 class="card-title">Card3</h5>
-                <p class="card-text">Info Card</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-            <div class="card-body">
-              <h5 class="card-title">Card4</h5>
-              <p class="card-text">Info Card</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-              <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-              <div class="card-body">
-                <h5 class="card-title">Card5</h5>
-                <p class="card-text">Info Card</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/61nxpt3BpdL._AC_SL1500_.jpg" alt="info">
-            <div class="card-body">
-              <h5 class="card-title">Card6</h5>
-              <p class="card-text">Info Card</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-
-<!-- footer -->
-<footer th:replace="fragments/footer :: footer"></footer>
-
-</body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="chart/chart.js"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
 </html>
