@@ -18,6 +18,11 @@
       footer {
         font-family: "Arial", sans-serif; /* Sostituisci 'Arial' con il tipo di carattere desiderato */
       }
+
+      .carousel img {
+            object-fit: cover;
+            max-height: 300px;
+        }
     </style>
   </head>
   <body>
@@ -33,14 +38,14 @@
       </div>
     </div>
 
-    <!-- carousel da fixare
 
+<!--
       <div class="carousel slide" data-ride="carousel">
 
         <div class="carousel-inner">
           <div th:each="image, status : ${strumento.urlFoto}"
                th:classappend="${status.index == 0} ? 'carousel-item-active' : 'carousel-item'">
-            <img th:src="${image.urlFoto}" class="d-block w-100" alt="img">
+            <img th:src="${image.urlFoto}"i class="d-block w-100" alt="img">
           </div>
 
 
@@ -55,8 +60,33 @@
 
         </div>
       </div>
-    -->
-
+-->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="container">
+        <div class="carousel-inner d-flex">
+          <div class="carousel-item active" >
+            <img src="https://media.guitarcenter.com/is/image/MMGS7/M05081000000000-00-600x600.jpg" class="d-block w-100 object-fit-cover" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img src="https://media.guitarcenter.com/is/image/MMGS7/L69588000003000-00-600x600.jpg" class="d-block w-100 object-fit-cover " alt="Image 2">
+          </div>
+          <div class="carousel-item">
+            <img src="https://media.guitarcenter.com/is/image/MMGS7/M00635000000000-00-600x600.jpg " class="d-block w-100 object-fit-cover " alt="Image 3">
+          </div>
+          <div class="carousel-item">
+            <img src="https://m.media-amazon.com/images/I/71wMe7pEZnL._AC_SL1500_.jpg" class="d-block w-100 object-fit-cover" alt="Image 4">
+          </div>
+        </div>
+          <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+      </div>
+    </div>
 
     <!-- card -->
     <div class="container">
