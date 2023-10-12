@@ -1,8 +1,11 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 import com.projectwork.shopstrumentimusicali.shop.Utils;
-import com.projectwork.shopstrumentimusicali.shop.model.*;
+import com.projectwork.shopstrumentimusicali.shop.model.Magazzino;
+import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
+import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
 import com.projectwork.shopstrumentimusicali.shop.repository.*;
+import com.projectwork.shopstrumentimusicali.shop.service.AdminService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,32 +33,34 @@ public class AdminController {
     private AssortimentoRepository assortimentoRepository;
     @Autowired
     private AcquistoRepository acquistoRepository;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping
-    public String adminPage(Model model) {
+    public String adminPage(Model model, @RequestParam(value = "time", required = false) String time) {
 
+        // Declare variables outside the conditionals
+        BigDecimal profitto;
+        int venditeTotali;
 
-        // calcolo il totale delgi assortimenti
-        List<Assortimento> assortimentiList =assortimentoRepository.findAll();
-        BigDecimal totaleAssortimenti =new BigDecimal(0);
-        for (Assortimento a : assortimentiList){
-            totaleAssortimenti.add(a.getTotale());
+        if (time != null && time.equals("2")) {
+            // Calculate values if 'time' is not null and equals "2"
+            profitto = adminService.calculateProfit();
+            venditeTotali = adminService.countVenditeTotali();
+        } else {
+            // Calculate values if 'time' is null or not equal to "2"
+            profitto = adminService.calculateProfit();
+            venditeTotali = adminService.countVenditeTotali();
         }
-        System.out.println(totaleAssortimenti);
-        // calcolo il totale dei profitti
-        List<Acquisto> acquistiList= acquistoRepository.findAll();
-        BigDecimal totaleAcquisti= new BigDecimal(0);
-        for (Acquisto a : acquistiList){
-            totaleAcquisti=totaleAcquisti.add(a.getStrumento().getPrezzo().multiply(BigDecimal.valueOf(a.getQuantity())));
-        }
-        System.out.println(totaleAcquisti);
-        BigDecimal profitto=totaleAcquisti.subtract(totaleAssortimenti);
-        System.out.println(profitto);
-        // calcolo il numero di vendite totali
-        int venditeTotali= acquistoRepository.findAll().size();
-        // passo al modello
-        model.addAttribute("profitto",profitto);
-        model.addAttribute("venditeTotali",venditeTotali);
+
+        // Pass values to the Thymeleaf template
+        model.addAttribute("profitto", profitto);
+        model.addAttribute("venditeTotali", venditeTotali);
+
+        // Your business logic to determine the initial value for "time"
+        String initialTimeValue = (time != null) ? time : "1"; // Set a default value if time is null
+        model.addAttribute("initialTimeValue", initialTimeValue);
+
         return "admin/admin-page";
     }
 
@@ -182,6 +187,7 @@ public class AdminController {
 
         return "admin/strumenti/list";
     }
+
     @GetMapping("/cerca-per-tipologia")
     public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
         List<Tipologia> listaTipologie = tipologiaRepository.findAll();
