@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,20 +46,29 @@ public class AdminController {
 
         if (time != null && time.equals("2")) {
             // Calculate values if 'time' is not null and equals "2"
-            profitto = adminService.calculateProfit();
-            venditeTotali = adminService.countVenditeTotali();
+            LocalDate oggi = LocalDate.now();
+            LocalDate mese = LocalDate.now().minusMonths(1);
+            LocalDate meseSecondo = LocalDate.now().minusMonths(2);
+
+            profitto = adminService.calculateProfitBetweenDates(mese, oggi);
+            venditeTotali = adminService.countVenditeTotaliBetweenDates(mese, oggi);
+            // calcolo variazioni percentuali e le passo ala view
+            BigDecimal profittoPrecedente = adminService.calculateProfitBetweenDates(meseSecondo, mese);
+            int venditeTotaliPrecedenti = adminService.countVenditeTotaliBetweenDates(meseSecondo, mese);
+            model.addAttribute("profittoPrecedente", profittoPrecedente);
+            model.addAttribute("venditeTotaliPrecedenti", venditeTotaliPrecedenti);
         } else {
             // Calculate values if 'time' is null or not equal to "2"
             profitto = adminService.calculateProfit();
             venditeTotali = adminService.countVenditeTotali();
         }
 
-        // Pass values to the Thymeleaf template
+
         model.addAttribute("profitto", profitto);
         model.addAttribute("venditeTotali", venditeTotali);
 
-        // Your business logic to determine the initial value for "time"
-        String initialTimeValue = (time != null) ? time : "1"; // Set a default value if time is null
+        //passa se è nulla il valore base 1
+        String initialTimeValue = (time != null) ? time : "1";
         model.addAttribute("initialTimeValue", initialTimeValue);
 
         return "admin/admin-page";

@@ -84,6 +84,9 @@
                             class="card-text fs-2 fw-bold text-dark"
                             th:text="${profitto}"
                     ></p>
+                    <div th:if="${profittoPrecedente != null}">
+                      <p>Profitto Precedente: <span th:text="${profittoPrecedente}"></span></p>
+                  </div>
                 </div>
             </div>
         </div>
@@ -95,6 +98,9 @@
                             class="card-text big-text text-dark"
                             th:text="${venditeTotali}"
                     ></p>
+                    <div th:if="${venditeTotaliPrecedenti != null}">
+                      <p>Vendite Totali Precedenti: <span th:text="${venditeTotaliPrecedenti}"></span></p>
+                  </div>
                 </div>
             </div>
         </div>
@@ -159,8 +165,8 @@
           .catch((error) => console.error(error));
 
         // acquisti profitto
-        // Fetch data from the API
-        fetch("/admin/api/profitto")
+        // Fetch data from the API `/admin/api/profitto?time=${timeSelect}`
+        fetch(`/admin/api/profitto?time=${timeSelect}`)
           .then((response) => response.json())
           .then((data) => {
             // Format the dates to display only the day
