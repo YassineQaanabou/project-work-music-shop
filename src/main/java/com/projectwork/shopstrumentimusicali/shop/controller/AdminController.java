@@ -1,12 +1,8 @@
 package com.projectwork.shopstrumentimusicali.shop.controller;
 
 import com.projectwork.shopstrumentimusicali.shop.Utils;
-import com.projectwork.shopstrumentimusicali.shop.model.Magazzino;
-import com.projectwork.shopstrumentimusicali.shop.model.Strumento;
-import com.projectwork.shopstrumentimusicali.shop.model.Tipologia;
-import com.projectwork.shopstrumentimusicali.shop.repository.MagazzinoRepository;
-import com.projectwork.shopstrumentimusicali.shop.repository.StrumentoRepository;
-import com.projectwork.shopstrumentimusicali.shop.repository.TipologiaRepository;
+import com.projectwork.shopstrumentimusicali.shop.model.*;
+import com.projectwork.shopstrumentimusicali.shop.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +23,10 @@ public class AdminController {
     private TipologiaRepository tipologiaRepository;
     @Autowired
     private StrumentoRepository strumentoRepository;
+    @Autowired
+    private FornitoreRepository fornitoreRepository;
+    @Autowired
+    private FornitoreStrumentoRepository fornitoreStrumentoRepository;
     @Autowired
     private MagazzinoRepository magazzinoRepository;
 
@@ -158,6 +158,7 @@ public class AdminController {
 
         return "admin/strumenti/list";
     }
+
     @GetMapping("/cerca-per-tipologia")
     public String cercaPerTipologia(@RequestParam("tipologiaSlug") String tipologiaSlug, Model model) {
         List<Tipologia> listaTipologie = tipologiaRepository.findAll();
@@ -167,5 +168,30 @@ public class AdminController {
         model.addAttribute("strumenti", strumentiPerTipologia);
         return "admin/strumenti/list";
     }
+
+    @GetMapping("/trova-fornitori-per-strumento")
+    public String trovaFornitoriPerStrumento(@RequestParam("fornitoreId") Integer fornitoreId, @RequestParam("strumentoId") Integer strumentoId, Model model) {
+        List<FornitoreStrumento> fornitori = fornitoreStrumentoRepository.findByStrumentoId(strumentoId);
+        Optional<Strumento> strumentoOptional = strumentoRepository.findById(strumentoId);
+        List<Strumento> strumentiPerFornitori = new ArrayList<>();
+        List<Fornitore> listaFornitori = new ArrayList<>(); // Aggiungi questa lista
+
+        if (strumentoOptional.isPresent()) {
+            Strumento strumento = strumentoOptional.get();
+
+            for (FornitoreStrumento fornitoreStrumento : fornitori) {
+                listaFornitori.add(fornitoreStrumento.getFornitore()); // Aggiungi il fornitore alla lista
+                if (fornitoreStrumento.getFornitore().getId().equals(fornitoreId)) {
+                    strumentiPerFornitori.add(strumento);
+                }
+            }
+        }
+
+        model.addAttribute("strumentiPerFornitori", strumentiPerFornitori);
+        model.addAttribute("listaFornitori", fornitori); // Aggiungi la lista dei fornitori al model
+
+        return "admin/strumenti/list";
+    }
+
 
 }

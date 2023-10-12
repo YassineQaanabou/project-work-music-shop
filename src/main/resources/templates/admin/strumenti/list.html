@@ -24,17 +24,29 @@
     <form th:action="@{/admin/cerca-per-quantita}" method="get">
       <input class="form-control me-2" type="number" placeholder="Cerca per quantità" aria-label="Search" name="quantity" required>
       <button class="btn btn-outline-success" type="submit">Cerca per quantità</button>
-    </form>
-    <form method="GET" th:action="/admin/cerca-per-tipologia" th:object="${tipologie}">
 
-      <label for="tipologiaSlug">Tipologia:</label>
+
+    </form>
+    <label for="tipologiaSlug">Tipologia:</label>
+    <form th:action="@{/admin/cerca-per-tipologia}" method="get">
       <select name="tipologiaSlug" id="tipologiaSlug">
         <option value="">Tutte le tipologie</option>
         <option th:each="tipologia : ${tipologie}"
                 th:value="${tipologia.slug}"
                 th:text="${tipologia.nome}"></option>
-      </select>
 
+      </select>
+      <button type="submit">Cerca</button>
+    </form>
+    <label for="fornitori">Fornitori:</label>
+    <form th:action="@{/admin/trova-fornitori-per-strumento}" method="get">
+      <select name="fornitori" id="fornitori">
+        <option value="">Seleziona un fornitore</option>
+        <option th:each="fornitore : ${fornitori}"
+                th:value="${fornitore.id}"
+                th:text="${fornitore.nome}"></option>
+
+      </select>
       <button type="submit">Cerca</button>
     </form>
     <canvas id="strumentiChart" width="400" height="100"></canvas>
