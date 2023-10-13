@@ -37,42 +37,22 @@
 >>>>>>> origin/branch_leo
     </style>
   </head>
+
+
   <body>
     <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
+
+
 
     <div class="container w-75">
       <div class="row d-flex justify-content-center">
         <div
-          class="col"
-          th:each="tipologia : ${tipologie}"
-          th:text="${tipologia.nome}"
-        ></div>
+          class="col" th:each="tipologia : ${tipologie}" th:text="${tipologia.nome}">
+        </div>
       </div>
     </div>
 
 
-<!--
-      <div class="carousel slide" data-ride="carousel">
-
-        <div class="carousel-inner">
-          <div th:each="image, status : ${strumento.urlFoto}"
-               th:classappend="${status.index == 0} ? 'carousel-item-active' : 'carousel-item'">
-            <img th:src="${image.urlFoto}"i class="d-block w-100" alt="img">
-          </div>
-
-
-          <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </a>
-
-        </div>
-      </div>
--->
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="container">
         <div class="carousel-inner d-flex">
