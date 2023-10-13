@@ -47,10 +47,26 @@ public class IndexController {
     }
 
     @GetMapping("/catalogo")
-    public String catalogo(Model model) {
-        List<Tipologia> tipologie=tipologiaRepository.findAll();
-        List<Strumento> strumenti = strumentoRepository.findAll();
-        model.addAttribute("strumenti", strumenti);
+    public String catalogo(Model model, @RequestParam(value = "q", required = false) Optional<String> searchString) {
+
+        List<Strumento> strumentiList;
+        // preparo la variabile con il valore con cui precaricare l'input di ricerca
+        String keyword = "";
+        // verifico se ho la stringa di ricerca
+        if (searchString.isPresent()) {
+            keyword = searchString.get();
+            // devo usare il metodo del repository che fa la ricerca filtrata
+            strumentiList = strumentoRepository.findByNomeContainingOrTipologiaNomeOrDescrizioneContaining(keyword, keyword, keyword);
+        } else {
+            // recupero tutti gli User da database
+            strumentiList = strumentoRepository.findAll();
+        }
+        // passo la lista di utenti alla view tramite model attribute
+        model.addAttribute("strumenti", strumentiList);
+        // passo anche l'attributo keyword con la chiave di ricerca
+        model.addAttribute("keyword", keyword);
+
+        List<Tipologia> tipologie = tipologiaRepository.findAll();
         model.addAttribute("tipologie", tipologie);
         return "customer/strumenti/list";
     }
@@ -116,6 +132,7 @@ public class IndexController {
 
         return "customer/strumenti/list";
     }
+
     @GetMapping("/cerca-per-tipologia")
     public String cercaPerTipologia(@RequestParam(value = "tipologiaSlug", required = false) String tipologiaSlug, Model model) {
         List<Tipologia> listaTipologie = tipologiaRepository.findAll();
