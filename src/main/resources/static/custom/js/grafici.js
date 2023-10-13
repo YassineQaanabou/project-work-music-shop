@@ -99,7 +99,7 @@
                 labels: labels,
                 datasets: [
                   {
-                    label: "Quantità",
+                    label: "Vendite per tipologia",
                     data: dataValues,
                     backgroundColor: [
                       "rgba(255, 99, 132, 0.5)",
@@ -125,7 +125,7 @@
                     beginAtZero: true,
                     title: {
                       display: true,
-                      text: "Quantità",
+                      text: "Vendite per tipologia",
                     },
                   },
                 },

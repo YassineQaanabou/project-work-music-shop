@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +55,29 @@ public class AdminController {
             venditeTotali = adminService.countVenditeTotaliBetweenDates(mese, oggi);
             // calcolo variazioni percentuali e le passo ala view
             BigDecimal profittoPrecedente = adminService.calculateProfitBetweenDates(meseSecondo, mese);
+            // Calcola la variazione percentuale
+            BigDecimal variazionePercentuale = BigDecimal.ZERO;
+            if (profittoPrecedente.compareTo(BigDecimal.ZERO) != 0) {
+                variazionePercentuale = profitto.subtract(profittoPrecedente)
+                        .divide(profittoPrecedente, 4, RoundingMode.HALF_UP)
+                        .multiply(BigDecimal.valueOf(100))
+                        .setScale(2, RoundingMode.HALF_UP);
+                ;
+            }
+            BigDecimal variazioneVendite = BigDecimal.ZERO;
             int venditeTotaliPrecedenti = adminService.countVenditeTotaliBetweenDates(meseSecondo, mese);
-            model.addAttribute("profittoPrecedente", profittoPrecedente);
-            model.addAttribute("venditeTotaliPrecedenti", venditeTotaliPrecedenti);
+
+            if (venditeTotaliPrecedenti != 0) {
+                variazioneVendite = BigDecimal.valueOf(venditeTotali).subtract(BigDecimal.valueOf(venditeTotaliPrecedenti))
+                        .divide(BigDecimal.valueOf(venditeTotaliPrecedenti), 4, RoundingMode.HALF_UP)
+                        .multiply(BigDecimal.valueOf(100))
+                        .setScale(2, RoundingMode.HALF_UP);
+                ;
+
+
+            }
+            model.addAttribute("profittoPrecedente", variazionePercentuale);
+            model.addAttribute("venditeTotaliPrecedenti", variazioneVendite);
         } else {
             // Calculate values if 'time' is null or not equal to "2"
             profitto = adminService.calculateProfit();

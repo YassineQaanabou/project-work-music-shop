@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -11,7 +13,10 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
     />
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script
             type="text/javascript"
             src="https://www.gstatic.com/charts/loader.js"
@@ -25,14 +30,12 @@
         font-size: 4em;
         font-weight: bold;
       }
-
-
-
-
-
-
-
-
+      .text-green{
+      color:#39FF14;
+      }
+        .text-red{
+      color:#FF3131;
+      }
 
 
 
@@ -75,29 +78,37 @@
 <div class="container">
     <div class="row d-flex justify-content-around">
         <div class="col-3 d-flex flex-column justify-content-center">
-            <div class="card">
+            <div class="card bg-dark ">
                 <div class="card-body">
-                    <h5 class="card-title fs-6 text-secondary">Profitto</h5>
+                    <h5 class="card-title fs-6 text-light">Profitto</h5>
                     <p
-                            class="card-text fs-2 fw-bold text-dark"
-                            th:text="${profitto}"
+                            class="card-text fs-2 fw-bold text-white"
+                            th:text="|${profitto}  &euro;|"
                     ></p>
                     <div th:if="${profittoPrecedente != null}">
-                        <p>Profitto Precedente: <span th:text="${profittoPrecedente}"></span></p>
+                        <p><span th:text="|${profittoPrecedente}%|"
+                                 class="fs-3 fw-bold"
+                                 th:classappend="${profittoPrecedente < 0} ? 'text-red' : 'text-green'">
+
+                        ></span></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-3 d-flex flex-column justify-content-center">
-            <div class="card bg-light-subtle">
+            <div class="card bg-dark">
                 <div class="card-body">
-                    <h6 class="card-title fs-6 text-secondary">Vendite Totali</h6>
+                    <h6 class="card-title fs-6 text-light">Vendite Totali</h6>
                     <p
-                            class="card-text big-text text-dark"
+                            class="card-text fs-2 fw-bold text-white"
                             th:text="${venditeTotali}"
                     ></p>
                     <div th:if="${venditeTotaliPrecedenti != null}">
-                        <p>Vendite Totali Precedenti: <span th:text="${venditeTotaliPrecedenti}"></span></p>
+                        <p><span th:text="|${venditeTotaliPrecedenti}%|"
+                                 class="fs-3 fw-bold"
+                                 th:classappend="${venditeTotaliPrecedenti < 0} ? 'text-red' : 'text-green'">
+
+                                 </span></p>
                     </div>
                 </div>
             </div>
