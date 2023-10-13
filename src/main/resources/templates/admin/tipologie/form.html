@@ -32,11 +32,11 @@
 
             <!-- nome tipologia-->
             <div class="mb-3 col-6">
-                <label for="nome-strumento" class="form-label">Nome tipologia</label>
+                <label for="nome-tipologia" class="form-label">Nome tipologia</label>
                 <input
                         type="text"
                         class="form-control"
-                        id="nome-strumento"
+                        id="nome-tipologia"
                         th:field="*{nome}"
                         th:errorClass="is-invalid"
                 />
@@ -44,6 +44,25 @@
                     <ul>
                         <li
                                 th:each="err : ${#fields.errors('nome')}"
+                                th:text="${err}"
+                        ></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- URL tipologia-->
+            <div class="mb-3 col-6">
+                <label for="url-tipologia" class="form-label">Url tipologia</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="url-tipologia"
+                        th:field="*{urlFoto}"
+                        th:errorClass="is-invalid"
+                />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('urlFoto')}">
+                    <ul>
+                        <li
+                                th:each="err : ${#fields.errors('urlFoto')}"
                                 th:text="${err}"
                         ></li>
                     </ul>

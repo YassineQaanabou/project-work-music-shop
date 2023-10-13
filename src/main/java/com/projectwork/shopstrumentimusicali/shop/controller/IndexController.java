@@ -117,6 +117,15 @@ public class IndexController {
 
     }
 
+    // checkout page --> devo passare la quantita e salvare l' acquisto
+    @GetMapping("/{tipologiaSlug}/{strumentoSlug}/checkout")
+    public String checkout(Model model,
+                           @PathVariable("tipologiaSlug") String tipologiaSlug,
+                           @PathVariable("strumentoSlug") String strumentoSlug) {
+        return "customer/strumenti/checkout";
+    }
+
+
     @GetMapping("/cerca")
     public String cercaStrumento(
             @RequestParam(value = "q", required = false) String searchString,
