@@ -37,6 +37,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -44,37 +57,19 @@
 <body class="bg-secondary-subtle">
 <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
 
-<form action="/admin" method="get" id="timeForm">
-    <label for="time">Seleziona il periodo:</label>
-    <select id="time" name="time">
-        <option value="1" th:selected="${initialTimeValue == '1'}">All</option>
-        <option value="2" th:selected="${initialTimeValue == '2'}">Last Month</option>
-    </select>
-    <button type="submit">applica</button>
+<form action="/admin" method="get" id="timeForm" class="form-inline col-2">
+    <div class="form-group m-2">
+        <label for="time" class="mr-2">Seleziona il periodo:</label>
+        <select id="time" name="time" class="form-control">
+            <option value="1" th:selected="${initialTimeValue == '1'}">Totale</option>
+            <option value="2" th:selected="${initialTimeValue == '2'}">Mese Corrente</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-dark m-2">Applica</button>
 </form>
 
-<div class="container my-2">
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <a
-                    th:href="@{/admin/strumenti/crea}"
-                    class="btn btn-outline-primary mx-1"
-            >Add Item</a
-            >
-            <a th:href="@{/admin/strumenti}" class="btn btn-outline-primary mx-1">
-                Item List</a
-            >
-            <a
-                    th:href="@{/admin/assortimenti}"
-                    class="btn btn-outline-primary mx-1"
-            >Assortimenti</a
-            >
-            <a th:href="@{/admin/acquisti}" class="btn btn-outline-primary mx-1"
-            >Vendite</a
-            >
-        </div>
-    </div>
-</div>
+<div th:replace="fragments/adminNav :: adminNav"></div>
+
 
 <!--  -->
 <div class="container">
