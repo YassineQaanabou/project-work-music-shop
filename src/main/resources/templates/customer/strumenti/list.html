@@ -16,27 +16,23 @@
 
 
 <div class="container">
-  <div class="row">
-    <div class="col my-4 mx-auto">
-      <form class="form-inline form-sm" th:action="@{/cerca}" method="get">
-        <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo minimo" name="prezzoMin">
-        <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo massimo" name="prezzoMax">
-        <button class="btn btn-success text-white me-2 my-2 my-sm-0" type="submit">Cerca</button>
+<div class="row">
+  <form class="form-inline form-sm" th:action="@{/cerca}" method="get">
+    <input class="form-control me-2 my-2 bg-light" type="number" placeholder="Prezzo minimo" name="prezzoMin">
+    <input class="form-control me-2 my-2 bg-light" type="number" placeholder="Prezzo massimo" name="prezzoMax">
+    <button class="btn btn-success text-white me-2 my-2 my-sm-0" type="submit">Cerca</button>
+  </form>
+  <form  method="GET" action="/cerca-per-tipologia">
 
+    <select class="form-select border me-2 my-2 bg-light" name="tipologiaSlug" id="tipologiaSlug">
+      <option value="">Tutte le tipologie</option>
+      <option th:each="tipologia : ${tipologie}"
+              th:value="${tipologia.slug}"
+              th:text="${tipologia.nome}"></option>
+    </select>
+    <button class="btn btn-success text-white me-2 my-2 my-sm-0" type="submit">Cerca</button>
 
-
-      </form>
-      <form  method="GET" action="/cerca-per-tipologia">
-
-        <select class="form-select border me-2 my-2" name="tipologiaSlug" id="tipologiaSlug">
-          <option value="">Tutte le tipologie</option>
-          <option th:each="tipologia : ${tipologie}"
-                  th:value="${tipologia.slug}"
-                  th:text="${tipologia.nome}"></option>
-        </select>
-        <button class="btn btn-success text-white me-2 my-2 my-sm-0" type="submit">Cerca</button>
-
-      </form>
+  </form>
     </div>
   </div>
 
@@ -99,5 +95,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"
 ></script>
+
 </body>
 </html>
