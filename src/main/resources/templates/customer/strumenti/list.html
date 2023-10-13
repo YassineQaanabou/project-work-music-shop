@@ -13,37 +13,34 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
-<form class="form-inline form-sm" th:action="@{/cerca}" method="get">
-  <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo minimo" name="prezzoMin">
-  <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo massimo" name="prezzoMax">
-  <button class="btn btn-outline-success my-2 my-sm-0 bg-primary mx-2" type="submit">Cerca</button>
-
-</form>
-<form method="GET" action="/cerca-per-tipologia">
-  <label for="tipologiaSlug">Tipologia:</label>
-  <select name="tipologiaSlug" id="tipologiaSlug">
-    <option value="">Tutte le tipologie</option>
-    <option th:each="tipologia : ${tipologie}"
-            th:value="${tipologia.slug}"
-            th:text="${tipologia.nome}"></option>
-  </select>
-  <button type="submit">Cerca</button>
-
-</form>
-
-<form method="GET" action="/cerca-disponibili">
-  <label for="soloDisponibili">Mostra solo strumenti disponibili:</label>
-  <select name="soloDisponibili" id="soloDisponibili">
-    <option value="true">Sì</option>
-    <option value="false">No</option>
-  </select>
-
-  <button type="submit">Cerca</button>
-</form>
-
 
 
 <div class="container">
+  <div class="row">
+    <div class="col my-4 mx-auto">
+      <form class="form-inline form-sm" th:action="@{/cerca}" method="get">
+        <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo minimo" name="prezzoMin">
+        <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo massimo" name="prezzoMax">
+        <button class="btn btn-light me-2 my-2 my-sm-0 bg-dark text-light" type="submit">Cerca</button>
+
+
+
+      </form>
+      <form method="GET" action="/cerca-per-tipologia">
+        <label for="tipologiaSlug">Tipologia:</label>
+        <select name="tipologiaSlug" id="tipologiaSlug">
+          <option value="">Tutte le tipologie</option>
+          <option th:each="tipologia : ${tipologie}"
+                  th:value="${tipologia.slug}"
+                  th:text="${tipologia.nome}"></option>
+        </select>
+        <button type="submit">Cerca</button>
+
+      </form>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="col my-4" th:each="strumento : ${strumenti}">
       <div class="card mx-auto"  style="width: 18rem">

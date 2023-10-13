@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +59,7 @@ public class IndexController {
     public String strumenti(@PathVariable("tipologiaSlug") String tipologiaSlug, Model model) {
         Optional<Tipologia> tipologiaOptional = tipologiaRepository.findBySlug(tipologiaSlug);
         Tipologia tipologia = tipologiaOptional.get();
+
         List<Strumento> strumenti = strumentoRepository.findByTipologia(tipologia);
         model.addAttribute("strumenti", strumenti);
         return "customer/strumenti/list";
@@ -135,21 +135,5 @@ public class IndexController {
         return "customer/strumenti/list";
     }
 
-    @GetMapping("/cerca-disponibili")
-    public String disponibili(@RequestParam(value = "strumentoSlug", required = false) String strumentoSlug, Model model) {
-        List<Strumento> strumentiDisp = new ArrayList<>();
 
-        List<Strumento> tuttiGliStrumenti = strumentoRepository.findAll();
-
-        for (Strumento strumento : tuttiGliStrumenti) {
-            Magazzino magazzino = strumento.getMagazzino();
-            if (magazzino != null && magazzino.getQuantity() >= 0) {
-                strumentiDisp.add(strumento);
-            }
-        }
-
-        model.addAttribute("strumenti", strumentiDisp);
-
-        return "customer/strumenti/list";
-    }
 }
