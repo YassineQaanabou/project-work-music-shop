@@ -43,7 +43,12 @@ public class AdminService {
     }
 
     public int countVenditeTotali() {
-        return acquistoRepository.findAll().size();
+        List<Acquisto> acquisti = acquistoRepository.findAll();
+        int vendite = 0;
+        for (Acquisto a : acquisti) {
+            vendite += a.getQuantity();
+        }
+        return vendite;
     }
 
     public BigDecimal calculateTotalAssortimentiBetweenDates(LocalDate startDate, LocalDate endDate) {
@@ -72,7 +77,12 @@ public class AdminService {
 
     public int countVenditeTotaliBetweenDates(LocalDate startDate, LocalDate endDate) {
         List<Acquisto> acquistiList = acquistoRepository.findByDataAcquistoBetween(startDate, endDate);
-        return acquistiList.size();
+
+        int vendite = 0;
+        for (Acquisto a : acquistiList) {
+            vendite += a.getQuantity();
+        }
+        return vendite;
     }
 
 
