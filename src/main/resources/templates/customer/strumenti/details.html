@@ -12,10 +12,21 @@
     />
     <style>
         .img-height{
-                margin-top: 20vh;
-                height: 50vh;
-                margin-bottom:20vh;
+                margin-top: 15vh;
+                height: 60vh;
+                margin-bottom:15vh;
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,16 +40,49 @@
 <!-- main content -->
 <main>
     <div class="w-100">
-        <div class="row">
+        <div class="row w-100">
             <!-- immagine -->
             <div class="col-12 col-md-6 d-flex justify-content-center">
                 <img th:src="${strumento.urlFoto}" alt="Immagine dello strumento" class="img-height"/>
             </div>
             <!-- dettagli del prodotto -->
-            <div class="col-12 col-md-6"></div>
+            <div class="col-12 col-md-6 p-5">
+                <p th:text="${strumento.tipologia.nome}"></p>
+                <h5 th:text="${strumento.nome}" class="text-secondary"></h5>
+                <h3 th:text="|${strumento.prezzo}&euro;|"></h3>
+                <p th:text="${strumento.descrizione}"></p>
+                <div class="col-lg-2 col-12 mt-5">
+                    <form method="GET"
+                          th:action="@{/{slugTipo}/{slugStrumento}/checkout(slugTipo=${tipologia.slug},slugStrumento=${strumento.slug})}"
+                          th:object="${acquisto}">
+                        <div class="mb-3">
+                            <label for="quantita" class="form-label">Quantità:</label>
+                            <input type="number" class="form-control" id="quantita" name="quantita"
+                                   th:field="*{quantity}"
+                                   th:errorClass="is-invalid">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}">
+                                // ${acquisto.utente.email}
+                                <ul>
+                                    <li
+                                            th:each="err : ${#fields.errors('quantity')}"
+                                            th:text="${err}"
+                                    ></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-dark">Checkout</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
 </main>
+<div th:replace="fragments/card :: card(list=${strumenti})"></div>
+
 <!-- footer -->
 
 <div class="row mx-auto">

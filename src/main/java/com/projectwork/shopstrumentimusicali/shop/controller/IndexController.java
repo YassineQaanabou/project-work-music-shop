@@ -86,6 +86,7 @@ public class IndexController {
         Optional<Strumento> strumentoOptional = strumentoRepository.findBySlug(strumentoSlug);
         Strumento strumento = strumentoOptional.get();
         model.addAttribute("strumento", strumento);
+        model.addAttribute("strumenti", strumentoRepository.findByTipologia(tipologiaRepository.findBySlug(tipologiaSlug).get()));
         model.addAttribute("tipologia", tipologiaRepository.findBySlug(tipologiaSlug).get());
 
         model.addAttribute("acquisto", new Acquisto());
