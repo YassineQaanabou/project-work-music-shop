@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Bootstrap demo</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
     />
-  </head>
-  <body>
-    
-    <!-- navbar -->
-    <nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
-    <main>
-      <div class="container" th:if="${flag} !=null">
+</head>
+<body>
+
+<!-- navbar -->
+<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+<div th:replace="fragments/adminNav :: adminNav"></div>
+
+<main>
+    <div class="container mt-4" th:if="${flag} !=null">
         <div class="row">
-          <div class="col-7 mx-auto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Data</th>
-                  <th scope="col">Strumento</th>
-                  <th scope="col">Quantità</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="acquisto : ${acquisti}">
+            <div class="col-7 mx-auto">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Strumento</th>
+                        <th scope="col">Quantità</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="acquisto : ${acquisti}">
 
-                  <td th:text="${acquisto.dataAcquisto}"></td>
+                        <td th:text="${acquisto.dataAcquisto}"></td>
 
-                  <td th:text="${acquisto.strumento.nome}"></td>
-                  <td th:text="${acquisto.quantity}"></td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
+                        <td th:text="${acquisto.strumento.nome}"></td>
+                        <td th:text="${acquisto.quantity}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-     
-    </main>
-    <!-- footer -->
-    <footer th:replace="fragments/footer :: footer"></footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    </div>
+
+</main>
+<!-- footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+></script>
+</body>
 </html>
