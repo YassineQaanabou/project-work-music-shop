@@ -9,11 +9,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AcquistoRepository extends JpaRepository<Acquisto, Integer> {
+
+    List<Acquisto> findByDataAcquistoBetween(LocalDate startDate, LocalDate endDate);
+
     @Query("SELECT a.strumento.nome, SUM(a.quantity) " +
             "FROM Acquisto a " +
             "GROUP BY a.strumento.nome")
     List<Object[]> findVenditeTotaliPerProdotto();
-
 
 
     @Query("SELECT a.strumento.tipologia, SUM(a.quantity) " +
@@ -27,7 +29,6 @@ public interface AcquistoRepository extends JpaRepository<Acquisto, Integer> {
             "WHERE a.dataAcquisto >= :startDate AND a.dataAcquisto <= :endDate " +
             "GROUP BY a.strumento.nome")
     List<Object[]> findVenditeTotaliPerProdottoLastMonth(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
-
 
 
     @Query("SELECT a.strumento.tipologia, SUM(a.quantity) " +

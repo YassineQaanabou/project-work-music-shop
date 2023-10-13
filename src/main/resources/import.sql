@@ -93,16 +93,26 @@ INSERT INTO fornitore_strumento(strumento_id, fornitore_id, prezzo) VALUES (11, 
 
 
 
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-09",3,2);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",1,7);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-04",2,4);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-01",5,1);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-02",1,2);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-03",1,12);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-05",4,8);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",2,11);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-07",1,3);
-INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-07",2,5);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-12", 3, 6);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-15", 2, 9);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-20", 1, 10);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-07-25", 4, 13);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-01", 1, 5);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-05", 2, 7);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-10", 3, 8);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-15", 1, 9);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-20", 2, 4);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-08-25", 5, 6);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-01", 2, 10);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-05", 1, 11);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-10", 3, 12);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-15", 4, 13);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-20", 2, 3);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-25", 1, 2);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-09-30", 5, 1);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-10-05", 3, 10);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-10-10", 2, 8);
+INSERT INTO acquisto(data_acquisto,quantity,strumento_id) VALUES ("2023-10-15", 1, 7);
 
 
 
