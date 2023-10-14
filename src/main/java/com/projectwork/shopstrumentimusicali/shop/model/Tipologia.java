@@ -23,9 +23,9 @@ public class Tipologia {
     private String slug;
     @OneToMany(mappedBy = "tipologia")
     @JsonIgnore
-    private List<Strumento> strumenti =new ArrayList<>();
+    private List<Strumento> strumenti = new ArrayList<>();
 
-    @NotBlank
+
     private String urlFoto;
 
     public Tipologia(String nome, String slug, List<Strumento> strumenti, String urlFoto) {
