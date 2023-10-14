@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -132,7 +133,9 @@ public class IndexController {
         // passo il form acquiso
         Acquisto acquisto = new Acquisto();
         acquisto.setQuantity(Integer.parseInt(quantity));
-
+        // passo al modello il totale della cendita
+        BigDecimal total = strumento.getPrezzo().multiply(BigDecimal.valueOf(Integer.parseInt(quantity)));
+        model.addAttribute("totale", total);
         model.addAttribute("acquisto", acquisto);
         return "customer/strumenti/checkout";
     }

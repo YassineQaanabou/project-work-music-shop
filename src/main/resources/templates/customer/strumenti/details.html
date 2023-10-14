@@ -33,12 +33,24 @@
 
 
 
+
+
+
+
     </style>
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar(area='Catalogo')"></nav>
 <!-- main content -->
 <main>
+    <nav aria-label="breadcrumb" class="p-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/{tipoSlug}(tipoSlug=${tipologia.slug})}"
+                                           th:text="${tipologia.nome}"></a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="${strumento.nome}"></li>
+        </ol>
+    </nav>
     <div class="w-100">
         <div class="row w-100">
             <!-- immagine -->
