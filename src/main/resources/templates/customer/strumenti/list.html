@@ -30,7 +30,11 @@
     <button type="submit">Cerca</button>
 
 </form>
-<div th:replace="fragments/card :: card(list=${strumenti})"></div>
+<div class="row">
+    <div class="col-3 my-4 " th:each="strumento : ${strumenti}">
+        <div th:replace="fragments/card :: card"></div>
+    </div>
+</div>
 <!--
 <div class="container">
   <div class="row">
