@@ -53,8 +53,8 @@ public class ProfittoService {
     }
 
     public List<ProfittoDto> getProfittoLastMonth() {
-        LocalDate today = LocalDate.now();
-        LocalDate lastMonth = today.minusMonths(1);
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        LocalDate lastMonth = tomorrow.minusMonths(1);
 
         List<ProfittoDto> profittoList = getProfitto();
 
@@ -62,7 +62,7 @@ public class ProfittoService {
 
         for (ProfittoDto entry : profittoList) {
             LocalDate entryDate = entry.getData();
-            if (entryDate.isAfter(lastMonth) && entryDate.isBefore(today)) {
+            if (entryDate.isAfter(lastMonth) && entryDate.isBefore(tomorrow)) {
                 profittoLastMonth.add(entry);
             }
         }

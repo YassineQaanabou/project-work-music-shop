@@ -1,90 +1,160 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bootstrap demo</title>
-  <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-          crossorigin="anonymous"
-  />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Music Shop | Catalogo </title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+    />
+    <style>
+  /* Rimuovi il background azzurro al clic */
+  .accordion-button:focus {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar(area='')"></nav>
-<form class="form-inline form-sm" th:action="@{/cerca}" method="get">
-  <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo minimo" name="prezzoMin">
-  <input class="form-control  me-2 my-2" type="number" placeholder="Prezzo massimo" name="prezzoMax">
-  <button class="btn btn-outline-success my-2 my-sm-0 bg-primary mx-2" type="submit">Cerca</button>
-
-</form>
-<form method="GET" action="/cerca-per-tipologia">
-  <label for="tipologiaSlug">Tipologia:</label>
-  <select name="tipologiaSlug" id="tipologiaSlug">
-    <option value="">Tutte le tipologie</option>
-    <option th:each="tipologia : ${tipologie}"
-            th:value="${tipologia.slug}"
-            th:text="${tipologia.nome}"></option>
-  </select>
-  <button type="submit">Cerca</button>
-
-</form>
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col my-4" th:each="strumento : ${strumenti}">
-      <div class="card mx-auto"  style="width: 18rem">
-        <div class="card-img d-flex align-self-center justify-content-center" style="height: 200px; width: 200px">
-          <img th:src="${strumento.urlFoto}"
-               class="d-flex justify-content-center"
-               alt="${strumento.tipologia}"
-               style="max-height: 100%; position: relative"/>
+<nav th:replace="fragments/navbar :: navbar(area='Catalogo')"></nav>
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-lg-4 col-12 d-flex justify-content-center">
+            <form class="form-inline form-sm col-lg-6 col-10" th:action="@{/cerca}" method="get">
+                <input
+                        class="form-control me-2 my-2 bg-light"
+                        type="number"
+                        placeholder="Prezzo minimo"
+                        name="prezzoMin"
+                />
+                <input
+                        class="form-control me-2 my-2 bg-light "
+                        type="number"
+                        placeholder="Prezzo massimo"
+                        name="prezzoMax"
+                />
+                <button
+                        class="btn btn-success text-white me-2 my-2 my-sm-0"
+                        type="submit"
+                >
+                    Cerca
+                </button>
+            </form>
         </div>
-        <div class="card-body">
-          <h5
-                  class="card-title bg-warning p-2 text-white"
-                  th:text="${strumento.nome}"
-          ></h5>
-          <p
-                  class="card-text fw-bold"
-                  th:text="${strumento.prezzo}+ '$'"
-          ></p>
-          <p
-                  class="card-text fw-bold"
-                  th:text="${strumento.descrizione}"
-          ></p>
-          <p class="card-text fw-bold" th:text="${strumento.tipologia}"></p>
-          <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}"
-                  class="btn btn-primary" >dettagli</a>
+        <div class="col-lg-4 col-12 d-flex justify-content-center">
+            <form method="GET" action="/cerca-per-tipologia" class="col-lg-6 col-10">
+                <select
+                        class="form-select border me-2 my-2 bg-light"
+                        name="tipologiaSlug"
+                        id="tipologiaSlug"
+                >
+                    <option value="">Tutte le tipologie</option>
+                    <option
+                            th:each="tipologia : ${tipologie}"
+                            th:value="${tipologia.slug}"
+                            th:text="${tipologia.nome}"
+                    ></option>
+                </select>
+                <button
+                        class="btn btn-success text-white me-2 my-2 my-sm-0"
+                        type="submit"
+                >
+                    Cerca
+                </button>
+            </form>
         </div>
-      </div>
+
+
     </div>
-  </div>
 </div>
-<!--
-<div class="container">
-  <div class="row">
-    <div class="col" th:each="strumento : ${strumenti}">
-      <a href="https://www.google.com">
-        <div class="card" style="width: 18rem">
-          <img th:src="${strumento.urlFoto}" class="card-img-top w-100" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up
-              the bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+
+<div class="mt-5">
+    <div class="row w-100 px-3">
+        <div class="col-lg-2 col-0 ">
+            <div class="accordion d-none d-md-block" id="accordionExample">
+                <div th:each="tipologia : ${tipologie}" class="mb-4">
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header border-0" th:id="'heading-' + ${tipologia.id}">
+                            <button class="accordion-button bg-transparent border-0 fw-bold fs-4" type="button"
+                                    data-bs-toggle="collapse"
+                                    th:data-bs-target="'#collapse-' + ${tipologia.id}" aria-expanded="true"
+                                    th:aria-controls="'collapse-' + ${tipologia.id}" th:text="${tipologia.nome}">
+
+                            </button>
+                        </h2>
+                        <div th:id="'collapse-' + ${tipologia.id}" class="accordion-collapse collapse "
+                             th:aria-labelledby="'heading-' + ${tipologia.id}"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body bg-transparent">
+                                <ul>
+                                    <li class="my-3" th:each="strumento : ${tipologia.strumenti}"
+                                    >
+                                        <a class="text-dark text-decoration-none"
+                                           th:href="@{/{tipoSlug}/{struSlug}(tipoSlug=${strumento.tipologia.slug},struSlug=${strumento.slug})}"
+                                           th:text="${strumento.nome}">ciao</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </a>
+        <div class="col-12 col-lg-10 p-2">
+            <div>
+                <div class="row">
+                    <div class="col-lg-4 my-4 col-12 px-0" th:each="strumento : ${strumenti}">
+                        <div class="mx-auto" th:replace="fragments/card :: card"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
--->
+
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script
