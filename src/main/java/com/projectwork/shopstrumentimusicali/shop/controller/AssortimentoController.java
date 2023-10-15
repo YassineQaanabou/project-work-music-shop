@@ -49,6 +49,7 @@ public class AssortimentoController {
             fornitori.add(value.getFornitore());
         }
         model.addAttribute("fornitori", fornitori);
+        model.addAttribute("fornitoriStrumento", fornitoreStrumento);
         // passo al modello strumento e tipologia
         model.addAttribute("strumento", strumento);
         model.addAttribute("tipologia", tipologiaRepository.findBySlug(slugTipo).get());

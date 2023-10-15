@@ -57,7 +57,28 @@
                     <button type="submit" class="btn btn-success">Salva</button>
                 </div>
             </form>
+
         </div>
+    </div>
+    <div class="row">
+        <div class="col-5 mx-auto mt-5">
+            <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Fornitore</th>
+                <th scope="col">Prezzo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fs : ${fornitoriStrumento}">
+                <td th:text="${fs.fornitore.nome}"></td>
+
+                <td th:text="${fs.prezzo}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
     </div>
 </div>
 
