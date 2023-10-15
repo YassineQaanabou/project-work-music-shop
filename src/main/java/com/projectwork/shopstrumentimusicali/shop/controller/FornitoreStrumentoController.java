@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/fornitura")
+@RequestMapping("/admin/fornitura")
 public class FornitoreStrumentoController {
     @Autowired
     private FornitoreRepository fornitoreRepository;
@@ -28,7 +28,7 @@ public class FornitoreStrumentoController {
     @Autowired
     private FornitoreStrumentoRepository fornitoreStrumentoRepository;
 
-    @GetMapping("{slug}/crea")
+    @GetMapping("/{slug}/crea")
     public String create(Model model, @PathVariable("slug") String slug) {
         List<Strumento> strumentiList = strumentoRepository.findAll();
         Optional<Fornitore> fornitore = fornitoreRepository.findBySlug(slug);
@@ -39,7 +39,7 @@ public class FornitoreStrumentoController {
         return "fornitura/form";
     }
 
-    @PostMapping("{slug}/crea")
+    @PostMapping("/{slug}/crea")
     public String doCreate(@Valid @ModelAttribute("fornitura") FornitoreStrumento formFornitura, @PathVariable("slug") String slug,
                            BindingResult bindingResult, Model model) {
 
@@ -53,7 +53,7 @@ public class FornitoreStrumentoController {
         formFornitura.setFornitore(fornitore.get());
         fornitoreStrumentoRepository.save(formFornitura);
 
-        return "redirect:/fornitore";
+        return "redirect:/admin/fornitore";
     }
 
     @PostMapping("/{id}/delete")
@@ -66,7 +66,7 @@ public class FornitoreStrumentoController {
 
         }
 
-        return "redirect:/fornitore";
+        return "redirect:/admin/fornitore";
     }
 
 }

@@ -9,11 +9,13 @@
     <title>Aggiungi fornitura</title>
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+<div th:replace="fragments/adminNav :: adminNav"></div>
 <div class="d-flex text-center mx-auto row w-75">
     <form
             id="fornitura-form"
             th:object="${fornitura}"
-            th:action="@{/fornitura/{slug}/crea(slug=${fornitore.slug})}"
+            th:action="@{/admin/fornitura/{slug}/crea (slug=${fornitore.slug})}"
             method="post">
 
 
@@ -36,8 +38,8 @@
 
         <hr>
 
-        <button type="submit" class="btn btn-warning">Save</button>
-        <a class="btn btn-warning" th:href="@{/fornitore}">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a class="btn btn-dark" th:href="@{admin/fornitore}">Cancel</a>
 
 
     </form>
