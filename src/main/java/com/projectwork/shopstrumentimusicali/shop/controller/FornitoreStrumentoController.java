@@ -56,6 +56,7 @@ public class FornitoreStrumentoController {
         return "redirect:/fornitore";
     }
 
+
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Integer id) {
         Optional<FornitoreStrumento> result = fornitoreStrumentoRepository.findById(id);
@@ -68,5 +69,17 @@ public class FornitoreStrumentoController {
 
         return "redirect:/fornitore";
     }
+
+
+        @GetMapping("/fornitori-strumenti")
+        public String listFornitoriStrumenti(Model model) {
+            // Ottieni la lista di FornitoriStrumento
+            Iterable<FornitoreStrumento> fornitoriStrumenti = fornitoreStrumentoRepository.findAll();
+
+            // Passa la lista al model
+            model.addAttribute("fornitoriStrumenti", fornitoriStrumenti);
+
+            return "fornitoriStrumenti";
+        }
 
 }
