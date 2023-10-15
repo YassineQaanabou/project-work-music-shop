@@ -34,7 +34,7 @@ public class StrumentoController {
     @GetMapping
     public String list(Model model) {
         // prendo la lista degli strumenti
-        List<Strumento> listStrumenti = strumentoRepository.findAll();
+        List<Strumento> listStrumenti = strumentoRepository.findAllAndOrderAsc();
         // salvo nel modello
         model.addAttribute("strumenti", listStrumenti);
         // ritorno il template
