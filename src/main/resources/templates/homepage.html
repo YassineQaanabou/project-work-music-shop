@@ -23,6 +23,27 @@ opacity: 0.9;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 <body>
 <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
@@ -142,8 +163,27 @@ opacity: 0.9;
     </div>
 </div>
 
-<!--banner-->
-<div data-aos="fade-up">
+<!--banner mobile-->
+<div class="d-sm-none overflow-hidden" style="height:110vh;">
+    <div class="row">
+        <div class="col">
+            <div class="position-relative">
+                <img src="https://images.pexels.com/photos/18508845/pexels-photo-18508845/free-photo-of-uomo-musica-musicista-concerto.jpeg?auto=compress&cs=tinysrgb&w=600"
+                     class="d-block w-100" alt="Banner" style="height:110vh;"
+                     data-aos="fade-up "
+                     data-aos-duration="1000">
+                <!-- add link to catalogo/chitarre-->
+                <div class="carousel-caption position-absolute bg-dark opacity-90">
+                    <h1>"Fender was the reason I began playing guitar."</h1>
+                    <p>-Me</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--banner desktop-->
+<div class="d-none d-sm-block" data-aos="fade-up">
     <div class="row">
         <div class="col">
             <div class="position-relative">
@@ -161,7 +201,7 @@ opacity: 0.9;
 
 
 <!--slide-->
-<div class="container my-4">
+<div class="container my-5">
     <h3 class="text-center my-3" data-aos="fade-up"> Best Seller del mese</h3>
     <div class="row g-5 mt-5" data-aos="fade-up">
         <div class="col-12 col-md-6 col-lg-4" th:each="strumento : ${strumentiPiuVendutiMese}" data-aos="fade-up">
@@ -171,9 +211,27 @@ opacity: 0.9;
     </div>
 </div>
 
+<!--banner mobile-->
+<div class="d-sm-none overflow-hidden" style="height:110vh;">
+    <div class="row">
+        <div class="col">
+            <div class="position-relative ">
+                <img src="https://images.pexels.com/photos/7577331/pexels-photo-7577331.jpeg?auto=compress&cs=tinysrgb&w=600
+"
+                     class="d-block w-100" alt="Banner" style="height:110vh;">
+                <!-- add link to catalogo/chitarre-->
+                <div class="carousel-caption position-absolute bg-light opacity-75 rounded">
+                    <h1 class="text-dark opacity-100 ">"Scopri il nostro catalogo!"</h1>
+                    <a href="/catalogo" th:classappend="${#strings.equals(area,'Catalogo') ? 'active' : ''}"
+                       class="btn btn-dark">Acquista ora</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!--banner-->
-<div data-aos="fade-up">
+<!--banner desktop-->
+<div class="d-none d-sm-block">
     <div class="row">
         <div class="col">
             <div class="position-relative ">
@@ -189,7 +247,6 @@ opacity: 0.9;
         </div>
     </div>
 </div>
-
 
 <!-- footer -->
 
@@ -210,6 +267,27 @@ opacity: 0.9;
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
         AOS.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
