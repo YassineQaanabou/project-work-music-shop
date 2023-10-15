@@ -87,7 +87,17 @@ public class AdminController {
 
         model.addAttribute("profitto", profitto);
         model.addAttribute("venditeTotali", venditeTotali);
+        // vedo se devo attivare notifiche
+        List<Magazzino> magazzinoList = magazzinoRepository.findAll();
+        int counter = 0;
+        int soglia = 0;
+        for (Magazzino m : magazzinoList) {
+            if (m.getQuantity() < soglia) {
+                counter += 1;
 
+            }
+        }
+        model.addAttribute("counter", counter);
         //passa se è nulla il valore base 1
         String initialTimeValue = (time != null) ? time : "1";
         model.addAttribute("initialTimeValue", initialTimeValue);

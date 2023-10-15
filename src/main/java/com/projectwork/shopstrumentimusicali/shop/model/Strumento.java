@@ -43,7 +43,7 @@ public class Strumento {
     @OneToMany(mappedBy = "strumento")
     private List<Assortimento> assortimenti;
 
-    @OneToOne(mappedBy = "strumento")
+    @OneToOne(mappedBy = "strumento", optional = false)
     private Magazzino magazzino;
 
     @OneToMany(mappedBy = "strumento")
