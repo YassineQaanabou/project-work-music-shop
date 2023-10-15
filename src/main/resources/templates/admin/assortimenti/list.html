@@ -32,7 +32,7 @@
                     <tr th:each="assortimento : ${assortimenti}">
 
                         <td th:text="${assortimento.data}"></td>
-                        <td th:text="${assortimento.strumento}"></td>
+                        <td th:text="${assortimento.strumento.nome}"></td>
                         <td th:text="${assortimento.fornitore.nome}"></td>
                         <td th:text="${assortimento.quantity}"></td>
                         <td th:text="${assortimento.totale}"></td>

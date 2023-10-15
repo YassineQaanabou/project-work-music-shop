@@ -77,7 +77,9 @@ public class IndexController {
         Optional<Tipologia> tipologiaOptional = tipologiaRepository.findBySlug(tipologiaSlug);
         Tipologia tipologia = tipologiaOptional.get();
         List<Strumento> strumenti = strumentoRepository.findByTipologia(tipologia);
+        List<Tipologia> tipologie = tipologiaRepository.findAll();
         model.addAttribute("strumenti", strumenti);
+        model.addAttribute("tipologie", tipologie);
         return "customer/strumenti/list";
 
     }
