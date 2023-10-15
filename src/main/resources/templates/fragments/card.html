@@ -6,28 +6,35 @@
 </head>
 <body>
 
-<div th:fragment="card" class="card  mx-auto text-center border border-0 shadow bg-body-tertiary rounded"
-     style="width: 18rem ; height: 400px;">
-    <div class="card-img d-flex align-self-center justify-content-center"
-         style="height: 200px; width: 200px">
-        <img th:src="${strumento.urlFoto}"
-             class="d-flex justify-content-center"
-             alt="${strumento.tipologia}"
-             style="max-height: 100%; position: relative"/>
-    </div>
-    <div class="card-body w-100 pt-3">
-        <h5
-                class="card-title bg-dark bg-gradient p-2 text-white rounded"
-                th:text="${strumento.nome}"
-        ></h5>
-        <p
-                class="card-text fs-4 fw-medium"
-                th:text="${strumento.prezzo}+ '$'"
-        ></p>
-        <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}"
-           class="btn btn-dark">Acquista ora</a>
+<div th:fragment="card(list)" class="col-12 col-md-6 col-lg-4" th:each="strumento : ${list}"
+     data-aos="fade-up" th:if="${strumento.inVendita == 1} ">
+
+    <div
+
+            class="card  mx-auto text-center border border-0 shadow bg-body-tertiary rounded"
+            style="width: 18rem ; height: 400px;">
+        <div class="card-img d-flex align-self-center justify-content-center"
+             style="height: 200px; width: 200px">
+            <img th:src="${strumento.urlFoto}"
+                 class="d-flex justify-content-center"
+                 alt="${strumento.tipologia}"
+                 style="max-height: 100%; position: relative"/>
+        </div>
+        <div class="card-body w-100 pt-3">
+            <h5
+                    class="card-title bg-dark bg-gradient p-2 text-white rounded"
+                    th:text="${strumento.nome}"
+            ></h5>
+            <p
+                    class="card-text fs-4 fw-medium"
+                    th:text="${strumento.prezzo}+ '$'"
+            ></p>
+            <a th:href="@{/{tipologiaSlug}/{strumentoSlug}(tipologiaSlug=${strumento.tipologia.slug}, strumentoSlug=${strumento.slug})}"
+               class="btn btn-dark">Acquista ora</a>
+        </div>
     </div>
 </div>
+
 
 </body>
 </html>

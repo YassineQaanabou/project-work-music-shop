@@ -54,6 +54,8 @@
                 <tr
                         th:each="strumento : ${strumenti}"
                         th:class="${strumento.magazzino.quantity lt 0} ? 'table-danger' : ''"
+                        th:classappend="${strumento.inVendita  == 0} ? 'table-secondary' : ''"
+
                 >
                     <td><img th:src="${strumento.urlFoto}" class=" p-3" style="height: 80px;"></td>
                     <td>
@@ -77,15 +79,43 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </td>
-                    <td>
-                        <form
-                                th:action="@{/admin/strumenti/{slug}/delete(slug=${strumento.slug})}"
-                                method="POST"
-                        >
-                            <button type="submit" class="btn btn-dark">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </form>
+                    <td th:if="${strumento.inVendita==0}">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class=" modal fade" id="exampleModal" tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione</h1>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p> Elimindando lo strumento andranno persi tutti i dati di vendita ed
+                                            assortimenti relativi
+                                            ad esso. Clicca conferma per procedere comunque</p>
+                                        <form
+                                                th:action="@{/admin/strumenti/{slug}/delete(slug=${strumento.slug})}"
+                                                method="POST"
+                                        >
+                                            <button type="submit" class="btn btn-dark">
+                                                conferma
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                     <td>
                         <a

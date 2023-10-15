@@ -127,6 +127,15 @@
                     <label class="form-check-label" th:for="|category_${tipo.id}|" th:text="${tipo.nome}"></label>
                 </div>
             </div>
+            <!-- in vendita -->
+            <div class="col-12">
+                <label for="inVenditaSelect">Seleziona lo stato di vendita:</label>
+                <select class="form-select" id="inVenditaSelect" th:field="*{inVendita}">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+
 
             <div class="mt-5s">
                 <button type="submit" class="btn btn-success">Salva</button>

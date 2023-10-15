@@ -44,6 +44,17 @@ opacity: 0.9;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 </style>
 <body>
 <nav th:replace="fragments/navbar :: navbar(area='')"></nav>
@@ -201,15 +212,15 @@ opacity: 0.9;
 
 
 <!--slide-->
-<div class="container my-5">
-    <h3 class="text-center my-3" data-aos="fade-up"> Best Seller del mese</h3>
-    <div class="row g-5 mt-5" data-aos="fade-up">
-        <div class="col-12 col-md-6 col-lg-4" th:each="strumento : ${strumentiPiuVendutiMese}" data-aos="fade-up">
-            <div th:replace="fragments/card :: card"></div>
+<div class="container my-4">
+    <h3 class="text-center">Best Sellers</h3>
+    <div class="row g-5">
+        <div th:replace="fragments/card :: card(list=${strumentiPiuVendutiMese})"></div>
 
-        </div>
     </div>
+
 </div>
+
 
 <!--banner mobile-->
 <div class="d-sm-none overflow-hidden" style="height:110vh;">
@@ -267,6 +278,17 @@ opacity: 0.9;
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
         AOS.init();
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -36,21 +36,37 @@ public class Strumento {
     @NotNull
     @Min(0)
     private BigDecimal prezzo;
-    @OneToMany(mappedBy = "strumento")
+    @OneToMany(mappedBy = "strumento", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Acquisto> acquisti = new ArrayList<>();
 
-    @OneToMany(mappedBy = "strumento")
+    @OneToMany(mappedBy = "strumento", cascade = CascadeType.REMOVE)
     private List<Assortimento> assortimenti;
 
-    @OneToOne(mappedBy = "strumento", optional = false)
+    @OneToOne(mappedBy = "strumento", optional = false, cascade = CascadeType.REMOVE)
     private Magazzino magazzino;
 
-    @OneToMany(mappedBy = "strumento")
+    @OneToMany(mappedBy = "strumento", cascade = CascadeType.REMOVE)
     private List<FornitoreStrumento> fornitoreStrumento;
+    @Column(name = "inVendita")
+    private Integer inVendita;
 
+    // costruttore
+    public Strumento() {
+        this.inVendita = 1; // Imposta il valore predefinito a true
+    }
 
     // getter e setter
+
+
+    public Integer getInVendita() {
+        return inVendita;
+    }
+
+    public void setInVendita(Integer inVendita) {
+        this.inVendita = inVendita;
+    }
+
     public Magazzino getMagazzino() {
         return magazzino;
     }
