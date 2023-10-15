@@ -73,7 +73,7 @@
             <tr th:each="fs : ${fornitoriStrumento}">
                 <td th:text="${fs.fornitore.nome}"></td>
 
-                <td th:text="${fs.prezzo}"></td>
+                <td th:text="'€ ' + ${fs.prezzo}"></td>
             </tr>
             </tbody>
         </table>
