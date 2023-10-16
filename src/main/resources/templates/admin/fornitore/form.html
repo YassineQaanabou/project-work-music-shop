@@ -7,13 +7,15 @@
     <title>Aggiunta Fornitore</title>
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+<div th:replace="fragments/adminNav :: adminNav"></div>
 <div class="d-flex text-center mx-auto row w-75">
     <form
             id="fornitore-form"
             th:object="${fornitore}"
             th:action="@{/fornitore/crea}"
             method="post">
-        <label for="nome" class="form-label">Nome</label>
+        <label for="nome" class="form-label fw-bold fs-5">Nome</label>
         <input type="text" class="form-control" id="nome" th:field="*{nome}" th:errorClass="is-invalid">
         <div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
             <ul>
@@ -24,10 +26,9 @@
 
         <hr>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn primary" th:href="@{/fornitore}">Cancel</a>
-
-
+        <button type="submit" class="btn btn-success">Salva</button>
+        <a class="btn btn-dark" th:href="@{/fornitore}">Annulla</a>
+        
     </form>
 </div>
 

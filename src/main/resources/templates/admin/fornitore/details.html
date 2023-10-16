@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <title>Strumenti forniti</title>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar(area='Admin')"></nav>
+<div th:replace="fragments/adminNav :: adminNav"></div>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-10 mx-auto">
+            <h1 th:text="${fornitore.nome}"></h1>
+            <div class="d-flex justify-content-center mt-3">
+                <a th:href="@{/admin/fornitura/{slug}/crea (slug=${fornitore.slug})}" class="btn btn-success">Aggiungi
+                    fornitura</a>
+
+            </div>
+
+            <table class="table text-start">
+                <thead>
+                <tr>
+                    <th scope="col">Strumento</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="strumento : ${list}">
+                    <td th:text="${strumento.strumento.nome}"></td>
+                    <td class="fw-bold " th:text="${strumento.prezzo}"></td>
+
+                    <td class="">
+                        <form
+                                th:action="@{/admin/fornitura/{id}/delete(id=${strumento.id})}"
+                                method="POST"
+                        >
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

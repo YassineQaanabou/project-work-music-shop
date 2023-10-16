@@ -31,7 +31,8 @@ public interface StrumentoRepository extends JpaRepository<Strumento, Integer> {
     @Query("SELECT s FROM Strumento s WHERE s.tipologia.slug = :tipologiaSlug")
     List<Strumento> findByTipologiaSlug(@Param("tipologiaSlug") String tipologiaSlug);
 
-    List<Strumento> findByInVendita(int inVenditaValue);
+    @Query("SELECT s FROM Strumento s JOIN Magazzino m ON s.id = m.strumento.id ORDER BY m.quantity ASC")
+    List<Strumento> findAllAndOrderAsc();
 
 }
 
