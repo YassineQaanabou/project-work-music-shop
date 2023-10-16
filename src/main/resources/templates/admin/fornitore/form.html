@@ -13,7 +13,7 @@
     <form
             id="fornitore-form"
             th:object="${fornitore}"
-            th:action="@{/fornitore/crea}"
+            th:action="@{/admin/fornitore/crea}"
             method="post">
         <label for="nome" class="form-label fw-bold fs-5">Nome</label>
         <input type="text" class="form-control" id="nome" th:field="*{nome}" th:errorClass="is-invalid">
@@ -28,7 +28,7 @@
 
         <button type="submit" class="btn btn-success">Salva</button>
         <a class="btn btn-dark" th:href="@{/fornitore}">Annulla</a>
-        
+
     </form>
 </div>
 

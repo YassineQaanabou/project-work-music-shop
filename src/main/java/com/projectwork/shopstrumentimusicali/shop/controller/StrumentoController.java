@@ -37,6 +37,7 @@ public class StrumentoController {
         List<Strumento> listStrumenti = strumentoRepository.findAllAndOrderAsc();
         // salvo nel modello
         model.addAttribute("strumenti", listStrumenti);
+        model.addAttribute("tipologie", tipologiaRepository.findAll());
         // ritorno il template
         return "/admin/strumenti/list";
 
