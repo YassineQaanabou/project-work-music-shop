@@ -45,13 +45,22 @@
 
 
 
+
+
+
+
+
+
     </style>
 </head>
 <body>
 <nav th:fragment="navbar(area)" class="navbar navbar-expand-lg bg-dark py-3 sticky-top " data-bs-theme="dark"
      method="get" id="navbar">
     <div class="container">
-        <a class="navbar-brand text-light" href="/">Music Shop</a>
+        <a class="navbar-brand text-light" href="/">
+            <img th:src="@{/custom/img/logo.png}" alt="Descrizione dell'immagine" style="height:60px;">
+
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
